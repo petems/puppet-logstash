@@ -23,12 +23,12 @@
 #
 # [*cache_xml_file*]
 #   The path to a GemFire client cache XML file.  Example:
-#   &lt;client-cache&gt;    &lt;pool name="client-pool"
-#   subscription-enabled="true" subscription-redundancy="1"&gt;
-#   &lt;locator host="localhost" port="31331"/&gt;    &lt;/pool&gt;
-#   &lt;region name="Logstash"&gt;        &lt;region-attributes
-#   refid="CACHING_PROXY" pool-name="client-pool" &gt;
-#   &lt;/region-attributes&gt;    &lt;/region&gt;  &lt;/client-cache&gt;
+#   <client-cache>    <pool name="client-pool"
+#   subscription-enabled="true" subscription-redundancy="1">
+#   <locator host="localhost" port="31331"/>    </pool>
+#   <region name="Logstash">        <region-attributes
+#   refid="CACHING_PROXY" pool-name="client-pool" >
+#   </region-attributes>    </region>  </client-cache>
 #   Value type is string
 #   Default value: nil
 #   This variable is optional

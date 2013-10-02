@@ -1,0 +1,1288 @@
+Searching 245 files for "&lt;"
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/grok.pp:
+   44  #   For this, you have a few options.  First, you can use the Oniguruma
+   45  #   syntax for 'named capture' which will let you match a piece of text
+   46: #   and save it as a field:  (?&lt;field_name&gt;the pattern here)   For
+   47  #   example, postfix logs have a 'queue id' that is an 11-character
+   48  #   hexadecimal value. I can capture that easily like this:
+   49: #   (?&lt;queue_id&gt;[0-9A-F]{11})   Alternately, you can create a custom
+   50  #   patterns file.  Create a directory called patterns with a file in it
+   51  #   called extra (the file name doesn't matter, but name it meaningfully
+   ..
+   57  #   Here's a full example with a sample log:  Jan  1 06:25:43 mailserver14
+   58  #   postfix/cleanup[21403]: BEF25A72965:
+   59: #   message-id=&lt;20130101142543.5828399CCAF@mailserver14.example.com&gt;
+   60  #   filter {   grok {     patterns_dir =&gt; "./patterns"     pattern
+   61  #   =&gt; "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}:
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/kv.pp:
+  102  #   A string of characters to trim from the value. This is useful if your
+  103  #   values are wrapped in brackets or are terminated by comma (like
+  104: #   postfix logs)  Example, to strip '&lt;' '&gt;' and ',' characters from
+  105: #   values:  filter {    kv {      trim =&gt; "&lt;&gt;,"   } }
+  106  #   Value type is string
+  107  #   Default value: None
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/ruby.pp:
+    3  #   Execute ruby code.  For example, to cancel 90% of events, you can do
+    4  #   this:  filter {   ruby {     # Cancel 90% of events     code =&gt;
+    5: #   "event.cancel if rand &lt;= 0.90"   }  }
+    6  #
+    7  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/gemfire.pp:
+   24  # [*cache_xml_file*]
+   25  #   The path to a GemFire client cache XML file.  Example:
+   26: #   &lt;client-cache&gt;    &lt;pool name="client-pool"
+   27  #   subscription-enabled="true" subscription-redundancy="1"&gt;
+   28: #   &lt;locator host="localhost" port="31331"/&gt;    &lt;/pool&gt;
+   29: #   &lt;region name="Logstash"&gt;        &lt;region-attributes
+   30  #   refid="CACHING_PROXY" pool-name="client-pool" &gt;
+   31: #   &lt;/region-attributes&gt;    &lt;/region&gt;  &lt;/client-cache&gt;
+   32  #   Value type is string
+   33  #   Default value: nil
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/snmptrap.pp:
+    2  #
+    3  #   Read snmp trap messages as events  Resulting @message looks like :
+    4: #   #&lt;SNMP::SNMPv1Trap:0x6f1a7a4
+    5: #   @varbindlist=[#&lt;SNMP::VarBind:0x2d7bcd8f @value="teststring",
+    6  #   @name=[1.11.12.13.14.15]&gt;],
+    7: #   @timestamp=#&lt;SNMP::TimeTicks:0x1af47e9d @value=55&gt;,
+    8  #   @generictrap=6,   @enterprise=[1.2.3.4.5.6], @sourceip="127.0.0.1",
+    9: #   @agentaddr=#&lt;SNMP::IpAddress:0x29a4833e
+   10  #   @value="\xC0\xC1\xC2\xC3"&gt;,   @specifictrap=99&gt;
+   11  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/gemfire.pp:
+   17  # [*cache_xml_file*]
+   18  #   The path to a GemFire client cache XML file.  Example:
+   19: #   &lt;client-cache&gt;    &lt;pool name="client-pool"&gt;
+   20: #   &lt;locator host="localhost" port="31331"/&gt;    &lt;/pool&gt;
+   21: #   &lt;region name="Logstash"&gt;        &lt;region-attributes
+   22  #   refid="CACHING_PROXY" pool-name="client-pool" &gt;
+   23: #   &lt;/region-attributes&gt;    &lt;/region&gt;  &lt;/client-cache&gt;
+   24  #   Value type is string
+   25  #   Default value: nil
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/loggly.pp:
+   35  #   https://logs.hoover.loggly.net/inputs/abcdef12-3456-7890-abcd-ef0123456789
+   36  #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   37: #   \----------&gt;   key   &lt;-------------/   You can use %{foo} field
+   38  #   lookups here if you need to pull the api key from the event. This is
+   39  #   mainly aimed at multitenant hosting providers who want to offer
+
+29 matches across 7 files
+
+
+Searching 245 files for "&gt;"
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/alter.pp:
+   11  # [*add_field*]
+   12  #   If this filter is successful, add any arbitrary fields to this event.
+   13: #   Example:  filter {   alter {     add_field =&gt; [ "sample", "Hello
+   14  #   world, from %{@source}" ]   } }    On success, the alter plugin
+   15  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   22  #   If this filter is successful, add arbitrary tags to the event. Tags
+   23  #   can be dynamic and include parts of the event using the %{field}
+   24: #   syntax. Example:  filter {   alter {     add_tag =&gt; [
+   25  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   26  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   31  # [*coalesce*]
+   32  #   Sets the value of field_name to the first nonnull expression among its
+   33: #   arguments.  Example:  filter {   alter {     coalesce =&gt; [
+   34  #   "field_name", "value1", "value2", "value3", ...     ]   } }
+   35  #   Value type is array
+   ..
+   40  #   Change the content of the field to the specified value if the actual
+   41  #   content is equal to the expected one.  Example:  filter {   alter {
+   42: #   condrewrite =&gt; [           "field_name", "expected_value",
+   43  #   "new_value"           "field_name2", "expected_value2, "new_value2"
+   44  #   ....        ]   } }
+   ..
+   50  #   Change the content of the field to the specified value if the content
+   51  #   of another field is equal to the expected one.  Example:  filter {
+   52: #   alter {     condrewriteother =&gt; [           "field_name",
+   53  #   "expected_value", "field_name_to_change", "value",
+   54  #   "field_name2", "expected_value2, "field_name_to_change2", "value2",
+   ..
+   68  #   If this filter is successful, remove arbitrary tags from the event.
+   69  #   Tags can be dynamic and include parts of the event using the %{field}
+   70: #   syntax. Example:  filter {   alter {     remove_tag =&gt; [
+   71  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   72  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/anonymize.pp:
+    8  # [*add_field*]
+    9  #   If this filter is successful, add any arbitrary fields to this event.
+   10: #   Example:  filter {   anonymize {     add_field =&gt; [ "sample", "Hello
+   11  #   world, from %{@source}" ]   } }    On success, the anonymize plugin
+   12  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   19  #   If this filter is successful, add arbitrary tags to the event. Tags
+   20  #   can be dynamic and include parts of the event using the %{field}
+   21: #   syntax. Example:  filter {   anonymize {     add_tag =&gt; [
+   22  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   23  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   56  #   If this filter is successful, remove arbitrary tags from the event.
+   57  #   Tags can be dynamic and include parts of the event using the %{field}
+   58: #   syntax. Example:  filter {   anonymize {     remove_tag =&gt; [
+   59  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   60  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/checksum.pp:
+   11  # [*add_field*]
+   12  #   If this filter is successful, add any arbitrary fields to this event.
+   13: #   Example:  filter {   checksum {     add_field =&gt; [ "sample", "Hello
+   14  #   world, from %{@source}" ]   } }    On success, the checksum plugin
+   15  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   22  #   If this filter is successful, add arbitrary tags to the event. Tags
+   23  #   can be dynamic and include parts of the event using the %{field}
+   24: #   syntax. Example:  filter {   checksum {     add_tag =&gt; [
+   25  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   26  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   52  #   If this filter is successful, remove arbitrary tags from the event.
+   53  #   Tags can be dynamic and include parts of the event using the %{field}
+   54: #   syntax. Example:  filter {   checksum {     remove_tag =&gt; [
+   55  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   56  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/clone.pp:
+    9  # [*add_field*]
+   10  #   If this filter is successful, add any arbitrary fields to this event.
+   11: #   Example:  filter {   clone {     add_field =&gt; [ "sample", "Hello
+   12  #   world, from %{@source}" ]   } }    On success, the clone plugin
+   13  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   20  #   If this filter is successful, add arbitrary tags to the event. Tags
+   21  #   can be dynamic and include parts of the event using the %{field}
+   22: #   syntax. Example:  filter {   clone {     add_tag =&gt; [
+   23  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   24  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   44  #   If this filter is successful, remove arbitrary tags from the event.
+   45  #   Tags can be dynamic and include parts of the event using the %{field}
+   46: #   syntax. Example:  filter {   clone {     remove_tag =&gt; [
+   47  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   48  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/csv.pp:
+    9  # [*add_field*]
+   10  #   If this filter is successful, add any arbitrary fields to this event.
+   11: #   Example:  filter {   csv {     add_field =&gt; [ "sample", "Hello
+   12  #   world, from %{@source}" ]   } }    On success, the csv plugin
+   13  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   20  #   If this filter is successful, add arbitrary tags to the event. Tags
+   21  #   can be dynamic and include parts of the event using the %{field}
+   22: #   syntax. Example:  filter {   csv {     add_tag =&gt; [
+   23  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   24  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   47  #   If this filter is successful, remove arbitrary tags from the event.
+   48  #   Tags can be dynamic and include parts of the event using the %{field}
+   49: #   syntax. Example:  filter {   csv {     remove_tag =&gt; [
+   50  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   51  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/date.pp:
+   18  # [*add_field*]
+   19  #   If this filter is successful, add any arbitrary fields to this event.
+   20: #   Example:  filter {   date {     add_field =&gt; [ "sample", "Hello
+   21  #   world, from %{@source}" ]   } }    On success, the date plugin
+   22  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   29  #   If this filter is successful, add arbitrary tags to the event. Tags
+   30  #   can be dynamic and include parts of the event using the %{field}
+   31: #   syntax. Example:  filter {   date {     add_tag =&gt; [
+   32  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   33  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   56  #   joda.time.format.DateTimeFormat  An array with field name first, and
+   57  #   format patterns following, [ field, formats... ]  If your time field
+   58: #   has multiple possible formats, you can do this:  match =&gt; [
+   59  #   "logdate", "MMM dd YYY HH:mm:ss",           "MMM  d YYY HH:mm:ss",
+   60  #   "ISO8601" ]   The above will match a syslog (rfc3164) or iso8601
+   ..
+   67  #   have a field 'logdate' and with a value that looks like 'Aug 13 2010
+   68  #   00:03:44', you would use this configuration:  filter {   date {
+   69: #   match =&gt; [ "logdate", "MMM dd YYYY HH:mm:ss" ]   } }
+   70  #   Value type is array
+   71  #   Default value: []
+   ..
+   75  #   If this filter is successful, remove arbitrary tags from the event.
+   76  #   Tags can be dynamic and include parts of the event using the %{field}
+   77: #   syntax. Example:  filter {   date {     remove_tag =&gt; [
+   78  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   79  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/dns.pp:
+    5  #   record/CNAME record lookup or a reverse lookup at the PTR record) on
+    6  #   records specified under the "reverse" and "resolve" arrays.  The
+    7: #   config should look like this:  filter {   dns {     type =&gt; 'type'
+    8: #   reverse =&gt; [ "@source_host", "field_with_address" ]     resolve
+    9: #   =&gt; [ "field_with_fqdn" ]     action =&gt; "replace"   } }
+   10  #   Caveats: at the moment, there's no way to tune the timeout with the
+   11  #   'resolv' core library.  It does seem to be fixed in here:
+   ..
+   25  # [*add_field*]
+   26  #   If this filter is successful, add any arbitrary fields to this event.
+   27: #   Example:  filter {   dns {     add_field =&gt; [ "sample", "Hello
+   28  #   world, from %{@source}" ]   } }    On success, the dns plugin
+   29  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   36  #   If this filter is successful, add arbitrary tags to the event. Tags
+   37  #   can be dynamic and include parts of the event using the %{field}
+   38: #   syntax. Example:  filter {   dns {     add_tag =&gt; [
+   39  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   40  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   53  #   If this filter is successful, remove arbitrary tags from the event.
+   54  #   Tags can be dynamic and include parts of the event using the %{field}
+   55: #   syntax. Example:  filter {   dns {     remove_tag =&gt; [
+   56  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   57  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/environment.pp:
+    8  # [*add_field*]
+    9  #   If this filter is successful, add any arbitrary fields to this event.
+   10: #   Example:  filter {   environment {     add_field =&gt; [ "sample", "Hello
+   11  #   world, from %{@source}" ]   } }    On success, the environment plugin
+   12  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   18  # [*add_field_from_env*]
+   19  #   Specify a hash of fields to the environment variable A hash of matches
+   20: #   of field =&gt; environment variable
+   21  #   Value type is hash
+   22  #   Default value: {}
+   ..
+   26  #   If this filter is successful, add arbitrary tags to the event. Tags
+   27  #   can be dynamic and include parts of the event using the %{field}
+   28: #   syntax. Example:  filter {   environment {     add_tag =&gt; [
+   29  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   30  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   43  #   If this filter is successful, remove arbitrary tags from the event.
+   44  #   Tags can be dynamic and include parts of the event using the %{field}
+   45: #   syntax. Example:  filter {   environment {     remove_tag =&gt; [
+   46  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   47  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/gelfify.pp:
+    9  # [*add_field*]
+   10  #   If this filter is successful, add any arbitrary fields to this event.
+   11: #   Example:  filter {   gelfify {     add_field =&gt; [ "sample", "Hello
+   12  #   world, from %{@source}" ]   } }    On success, the gelfify plugin
+   13  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   20  #   If this filter is successful, add arbitrary tags to the event. Tags
+   21  #   can be dynamic and include parts of the event using the %{field}
+   22: #   syntax. Example:  filter {   gelfify {     add_tag =&gt; [
+   23  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   24  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   37  #   If this filter is successful, remove arbitrary tags from the event.
+   38  #   Tags can be dynamic and include parts of the event using the %{field}
+   39: #   syntax. Example:  filter {   gelfify {     remove_tag =&gt; [
+   40  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   41  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/geoip.pp:
+   13  # [*add_field*]
+   14  #   If this filter is successful, add any arbitrary fields to this event.
+   15: #   Example:  filter {   geoip {     add_field =&gt; [ "sample", "Hello
+   16  #   world, from %{@source}" ]   } }    On success, the geoip plugin
+   17  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   24  #   If this filter is successful, add arbitrary tags to the event. Tags
+   25  #   can be dynamic and include parts of the event using the %{field}
+   26: #   syntax. Example:  filter {   geoip {     add_tag =&gt; [
+   27  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   28  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   60  #   If this filter is successful, remove arbitrary tags from the event.
+   61  #   Tags can be dynamic and include parts of the event using the %{field}
+   62: #   syntax. Example:  filter {   geoip {     remove_tag =&gt; [
+   63  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   64  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/grep.pp:
+   11  # [*add_field*]
+   12  #   If this filter is successful, add any arbitrary fields to this event.
+   13: #   Example:  filter {   grep {     add_field =&gt; [ "sample", "Hello
+   14  #   world, from %{@source}" ]   } }    On success, the grep plugin
+   15  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   22  #   If this filter is successful, add arbitrary tags to the event. Tags
+   23  #   can be dynamic and include parts of the event using the %{field}
+   24: #   syntax. Example:  filter {   grep {     add_tag =&gt; [
+   25  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   26  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   46  #
+   47  # [*match*]
+   48: #   A hash of matches of field =&gt; regexp.  If multiple matches are
+   49  #   specified, all must match for the grep to be considered successful.
+   50  #   Normal regular expressions are supported here.  For example:  filter {
+   51: #   grep {     match =&gt; [ "@message", "hello world" ]   } }   The above
+   52  #   will drop all events with a message not matching "hello world" as a
+   53  #   regular expression.
+   ..
+   67  #   If this filter is successful, remove arbitrary tags from the event.
+   68  #   Tags can be dynamic and include parts of the event using the %{field}
+   69: #   syntax. Example:  filter {   grep {     remove_tag =&gt; [
+   70  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   71  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/grok.pp:
+   32  #   %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}   A more
+   33  #   realistic example, let's read these logs from a file:  input {   file
+   34: #   {     path =&gt; "/var/log/http.log"     type =&gt; "examplehttp"   }
+   35: #   } filter {   grok {     type =&gt; "examplehttp"     pattern =&gt;
+   36  #   "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes}
+   37  #   %{NUMBER:duration}"   } }   After the grok filter, the event will have
+   ..
+   44  #   For this, you have a few options.  First, you can use the Oniguruma
+   45  #   syntax for 'named capture' which will let you match a piece of text
+   46: #   and save it as a field:  (?<field_name&gt;the pattern here)   For
+   47  #   example, postfix logs have a 'queue id' that is an 11-character
+   48  #   hexadecimal value. I can capture that easily like this:
+   49: #   (?<queue_id&gt;[0-9A-F]{11})   Alternately, you can create a custom
+   50  #   patterns file.  Create a directory called patterns with a file in it
+   51  #   called extra (the file name doesn't matter, but name it meaningfully
+   ..
+   57  #   Here's a full example with a sample log:  Jan  1 06:25:43 mailserver14
+   58  #   postfix/cleanup[21403]: BEF25A72965:
+   59: #   message-id=<20130101142543.5828399CCAF@mailserver14.example.com&gt;
+   60: #   filter {   grok {     patterns_dir =&gt; "./patterns"     pattern
+   61: #   =&gt; "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}:
+   62  #   %{GREEDYDATA:message}"   } }   The above will match and result in the
+   63  #   following fields:  timestamp: Jan  1 06:25:43 logsource: mailserver14
+   ..
+   71  # [*add_field*]
+   72  #   If this filter is successful, add any arbitrary fields to this event.
+   73: #   Example:  filter {   grok {     add_field =&gt; [ "sample", "Hello
+   74  #   world, from %{@source}" ]   } }    On success, the grok plugin
+   75  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   82  #   If this filter is successful, add arbitrary tags to the event. Tags
+   83  #   can be dynamic and include parts of the event using the %{field}
+   84: #   syntax. Example:  filter {   grok {     add_tag =&gt; [
+   85  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   86  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+  119  #
+  120  # [*match*]
+  121: #   A hash of matches of field =&gt; value  For example:  filter {   grok
+  122: #   {     match =&gt; [ "@message", "Duration: %{NUMBER:duration} ]   } }
+  123  #   Value type is hash
+  124  #   Default value: {}
+  ...
+  151  #   If this filter is successful, remove arbitrary tags from the event.
+  152  #   Tags can be dynamic and include parts of the event using the %{field}
+  153: #   syntax. Example:  filter {   grok {     remove_tag =&gt; [
+  154  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+  155  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/grokdiscovery.pp:
+    9  # [*add_field*]
+   10  #   If this filter is successful, add any arbitrary fields to this event.
+   11: #   Example:  filter {   grokdiscovery {     add_field =&gt; [ "sample", "Hello
+   12  #   world, from %{@source}" ]   } }    On success, the grokdiscovery plugin
+   13  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   20  #   If this filter is successful, add arbitrary tags to the event. Tags
+   21  #   can be dynamic and include parts of the event using the %{field}
+   22: #   syntax. Example:  filter {   grokdiscovery {     add_tag =&gt; [
+   23  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   24  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   37  #   If this filter is successful, remove arbitrary tags from the event.
+   38  #   Tags can be dynamic and include parts of the event using the %{field}
+   39: #   syntax. Example:  filter {   grokdiscovery {     remove_tag =&gt; [
+   40  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   41  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/json.pp:
+    9  # [*add_field*]
+   10  #   If this filter is successful, add any arbitrary fields to this event.
+   11: #   Example:  filter {   json {     add_field =&gt; [ "sample", "Hello
+   12  #   world, from %{@source}" ]   } }    On success, the json plugin
+   13  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   20  #   If this filter is successful, add arbitrary tags to the event. Tags
+   21  #   can be dynamic and include parts of the event using the %{field}
+   22: #   syntax. Example:  filter {   json {     add_tag =&gt; [
+   23  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   24  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   37  #   If this filter is successful, remove arbitrary tags from the event.
+   38  #   Tags can be dynamic and include parts of the event using the %{field}
+   39: #   syntax. Example:  filter {   json {     remove_tag =&gt; [
+   40  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   41  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+   46  #
+   47  # [*source*]
+   48: #   Config for json is:  source =&gt; source_field   For example, if you
+   49  #   have json data in the @message field:  filter {   json {     source
+   50: #   =&gt; "@message"   } }   The above would parse the xml from the
+   51  #   @message field
+   52  #   Value type is string
+   ..
+   63  # [*target*]
+   64  #   Define target for placing the data  for example if you want the data
+   65: #   to be put in the 'doc' field:  filter {   json {     target =&gt;
+   66  #   "doc"   } }   json in the value of the source field will be expanded
+   67  #   into a datastructure in the "target" field. Note: if the "target"
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/kv.pp:
+   16  # [*add_field*]
+   17  #   If this filter is successful, add any arbitrary fields to this event.
+   18: #   Example:  filter {   kv {     add_field =&gt; [ "sample", "Hello
+   19  #   world, from %{@source}" ]   } }    On success, the kv plugin
+   20  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   27  #   If this filter is successful, add arbitrary tags to the event. Tags
+   28  #   can be dynamic and include parts of the event using the %{field}
+   29: #   syntax. Example:  filter {   kv {     add_tag =&gt; [
+   30  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   31  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   46  #   from a url query string such as
+   47  #   '?pin=12345~0&amp;d=123&amp;e=foo@bar.com&amp;oq=bobo&amp;ss=12345':
+   48: #   filter {   kv {     field_split =&gt; "&amp;?"    } }   The above
+   49  #   splits on both "&amp;" and "?" characters, giving you the following
+   50  #   fields:  pin: 12345~0 d: 123 e: foo@bar.com oq: bobo ss: 12345
+   ..
+   61  # [*prefix*]
+   62  #   A string to prepend to all of the extracted keys  Example, to prepend
+   63: #   arg_ to all keys:  filter { kv { prefix =&gt; "arg_" } }
+   64  #   Value type is string
+   65  #   Default value: ""
+   ..
+   69  #   If this filter is successful, remove arbitrary tags from the event.
+   70  #   Tags can be dynamic and include parts of the event using the %{field}
+   71: #   syntax. Example:  filter {   kv {     remove_tag =&gt; [
+   72  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   73  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+   79  # [*source*]
+   80  #   The fields to perform 'key=value' searching on  Example, to use the
+   81: #   @message field:  filter { kv { source =&gt; "@message" } }
+   82  #   Value type is string
+   83  #   Default value: "@message"
+   ..
+   93  # [*target*]
+   94  #   The name of the container to put all of the key-value pairs into
+   95: #   Example, to place all keys into field kv:  filter { kv { target =&gt;
+   96  #   "kv" } }
+   97  #   Value type is string
+   ..
+  102  #   A string of characters to trim from the value. This is useful if your
+  103  #   values are wrapped in brackets or are terminated by comma (like
+  104: #   postfix logs)  Example, to strip '<' '&gt;' and ',' characters from
+  105: #   values:  filter {    kv {      trim =&gt; "<&gt;,"   } }
+  106  #   Value type is string
+  107  #   Default value: None
+  ...
+  119  #   A string of characters to use as delimiters for identifying key-value
+  120  #   relations.  Example, to identify key-values such as 'key1:value1
+  121: #   key2:value2':  filter { kv { value_split =&gt; ":" } }
+  122  #   Value type is string
+  123  #   Default value: "="
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/metrics.pp:
+    4  #   you have a field 'response' that is a http response code, and you want
+    5  #   to count each kind of response, you can do this:  filter {   metrics {
+    6: #   meter =&gt; [ "http.%{response}" ]     add_tag =&gt; metric   } }
+    7  #   Metrics are flushed every 5 seconds. Metrics appear as new events in
+    8  #   the event stream and go through any filters that occur after as well
+    .
+   10  #   and have an output explicitly look for that tag.  The event that is
+   11  #   flushed will include every 'meter' and 'timer' metric in the following
+   12: #   way:  'meter' values  For a meter =&gt; "something" you will receive
+   13  #   the following fields:  "thing.count" - the total count of events
+   14  #   "thing.rate_1m" - the 1-minute rate (sliding) "thing.rate_5m" - the
+   15  #   5-minute rate (sliding) "thing.rate_15m" - the 15-minute rate
+   16: #   (sliding) 'timer' values  For a timer =&gt; [ "thing", "%{duration}" ]
+   17  #   you will receive the following fields:  "thing.count" - the total
+   18  #   count of events "thing.rate_1m" - the 1-minute rate of events
+   ..
+   24  #   event rate  For a simple example, let's track how many events per
+   25  #   second are running through logstash:  input {   generator {     type
+   26: #   =&gt; "generated"   } }  filter {   metrics {     type =&gt;
+   27: #   "generated"     meter =&gt; "events"     add_tag =&gt; "metric"   } }
+   28  #   output {   stdout {     # only emit events with the 'metric' tag
+   29: #   tags =&gt; "metric"     message =&gt; "rate: %{events.rate_1m}"   } }
+   30  #   Running the above:  % java -jar logstash.jar agent -f example.conf
+   31  #   rate: 23721.983566819246 rate: 24811.395722536377 rate:
+   ..
+   33  #   includes our 'events' 1-minute rate.  In the real world, you would
+   34  #   emit this to graphite or another metrics store, like so:  output {
+   35: #   graphite {     metrics =&gt; [ "events.rate_1m", "%{events.rate_1m}" ]
+   36  #   } }
+   37  #
+   ..
+   41  # [*add_field*]
+   42  #   If this filter is successful, add any arbitrary fields to this event.
+   43: #   Example:  filter {   metrics {     add_field =&gt; [ "sample", "Hello
+   44  #   world, from %{@source}" ]   } }    On success, the metrics plugin
+   45  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   52  #   If this filter is successful, add arbitrary tags to the event. Tags
+   53  #   can be dynamic and include parts of the event using the %{field}
+   54: #   syntax. Example:  filter {   metrics {     add_tag =&gt; [
+   55  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   56  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   71  #   near real-time in your metrics.  Example, to only count events that
+   72  #   are within 10 seconds of real-time, you would do this:  filter {
+   73: #   metrics {     meter =&gt; [ "hits" ]     ignore_older_than =&gt; 10
+   74  #   } }
+   75  #   Value type is number
+   ..
+   78  #
+   79  # [*meter*]
+   80: #   syntax: meter =&gt; [ "name of metric", "name of metric" ]
+   81  #   Value type is array
+   82  #   Default value: []
+   ..
+   86  #   If this filter is successful, remove arbitrary tags from the event.
+   87  #   Tags can be dynamic and include parts of the event using the %{field}
+   88: #   syntax. Example:  filter {   metrics {     remove_tag =&gt; [
+   89  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   90  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+  102  #
+  103  # [*timer*]
+  104: #   syntax: timer =&gt; [ "name of metric", "%{time_value}" ]
+  105  #   Value type is hash
+  106  #   Default value: {}
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/multiline.pp:
+    7  #   single event. For example - joining java exception and stacktrace
+    8  #   messages into a single event.  TODO(sissel): Document any issues? The
+    9: #   config looks like this:  filter {   multiline {     type =&gt; "type"
+   10: #   pattern =&gt; "pattern, a regexp"     negate =&gt; boolean     what
+   11: #   =&gt; "previous" or "next"   } }   The 'regexp' should match what you
+   12  #   believe to be an indicator that the field is part of a multi-line
+   13  #   event  The 'what' must be "previous" or "next" and indicates the
+   ..
+   18  #   multiline and usually have the message starting at the far-left, then
+   19  #   each subsequent line indented. Do this:  filter {   multiline {
+   20: #   type =&gt; "somefiletype"     pattern =&gt; "^\s"     what =&gt;
+   21  #   "previous"   } }   This says that any line starting with whitespace
+   22  #   belongs to the previous line.  Another example is C line continuations
+   23  #   (backslash). Here's how to do that:  filter {   multiline {     type
+   24: #   =&gt; "somefiletype "     pattern =&gt; "\\$"     what =&gt; "next"
+   25  #   } }
+   26  #
+   ..
+   30  # [*add_field*]
+   31  #   If this filter is successful, add any arbitrary fields to this event.
+   32: #   Example:  filter {   multiline {     add_field =&gt; [ "sample", "Hello
+   33  #   world, from %{@source}" ]   } }    On success, the multiline plugin
+   34  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   41  #   If this filter is successful, add arbitrary tags to the event. Tags
+   42  #   can be dynamic and include parts of the event using the %{field}
+   43: #   syntax. Example:  filter {   multiline {     add_tag =&gt; [
+   44  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   45  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   79  #   If this filter is successful, remove arbitrary tags from the event.
+   80  #   Tags can be dynamic and include parts of the event using the %{field}
+   81: #   syntax. Example:  filter {   multiline {     remove_tag =&gt; [
+   82  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   83  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/mutate.pp:
+   10  # [*add_field*]
+   11  #   If this filter is successful, add any arbitrary fields to this event.
+   12: #   Example:  filter {   mutate {     add_field =&gt; [ "sample", "Hello
+   13  #   world, from %{@source}" ]   } }    On success, the mutate plugin
+   14  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   21  #   If this filter is successful, add arbitrary tags to the event. Tags
+   22  #   can be dynamic and include parts of the event using the %{field}
+   23: #   syntax. Example:  filter {   mutate {     add_tag =&gt; [
+   24  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   25  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   33  #   converted. If the field is a hash, no action will be taken.  Valid
+   34  #   conversion targets are: integer, float, string  Example:  filter {
+   35: #   mutate {     convert =&gt; [ "fieldname", "integer" ]   } }
+   36  #   Value type is hash
+   37  #   Default value: None
+   ..
+   50  #   This configuration takes an array consisting of 3 elements per
+   51  #   field/substitution.  be aware of escaping any backslash in the config
+   52: #   file  for example:  filter {   mutate {     gsub =&gt; [       #
+   53  #   replace all forward slashes with underscore       "fieldname", "/",
+   54  #   "_",        # replace backslashes, question marks, hashes, and minuses
+   ..
+   60  # [*join*]
+   61  #   Join an array with a separator character, does nothing on non-array
+   62: #   fields  Example:     filter {   mutate {     join =&gt; ["fieldname",
+   63  #   ","]  }      }
+   64  #   Value type is hash
+   ..
+   68  # [*lowercase*]
+   69  #   Convert a string to its lowercase equivalent  Example:  filter {
+   70: #   mutate {     lowercase =&gt; [ "fieldname" ]   } }
+   71  #   Value type is array
+   72  #   Default value: None
+   ..
+   77  #   in array, so  array + string will work  string + string will result in
+   78  #   an 2 entry array in dest_field  array and hash will not work  Example:
+   79: #   filter {   mutate {       merge =&gt; ["dest_field", "added_field"]
+   80  #   } }
+   81  #   Value type is hash
+   ..
+   85  # [*remove*]
+   86  #   Remove one or more fields.  Example:  filter {   mutate {     remove
+   87: #   =&gt; [ "client" ]  # Removes the 'client' field   } }
+   88  #   Value type is array
+   89  #   Default value: None
+   ..
+   93  #   If this filter is successful, remove arbitrary tags from the event.
+   94  #   Tags can be dynamic and include parts of the event using the %{field}
+   95: #   syntax. Example:  filter {   mutate {     remove_tag =&gt; [
+   96  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   97  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+  103  # [*rename*]
+  104  #   Rename one or more fields.  Example:  filter {   mutate {     #
+  105: #   Renames the 'HOSTORIP' field to 'client_ip'     rename =&gt; [
+  106  #   "HOSTORIP", "client_ip" ]   } }
+  107  #   Value type is hash
+  ...
+  112  #   Replace a field with a new value. The new value can include %{foo}
+  113  #   strings to help you build a new value from other parts of the event.
+  114: #   Example:  filter {   mutate {     replace =&gt; [ "@message",
+  115  #   "%{source_host}: My new message" ]   } }
+  116  #   Value type is hash
+  ...
+  120  # [*split*]
+  121  #   Split a field to an array using a separator character. Only works on
+  122: #   string fields.  Example:  filter {   mutate {       split =&gt;
+  123  #   ["fieldname", ","]   } }
+  124  #   Value type is hash
+  ...
+  127  #
+  128  # [*strip*]
+  129: #   Strip whitespaces  Example:  filter {   mutate {       strip =&gt;
+  130  #   ["field1", "field2"]   } }
+  131  #   Value type is array
+  ...
+  151  #   Update an existing field with a new value. If the field does not
+  152  #   exist, then no action will be taken.  Example:  filter {   mutate {
+  153: #   update =&gt; [ "sample", "My new message" ]   } }
+  154  #   Value type is hash
+  155  #   Default value: None
+  ...
+  158  # [*uppercase*]
+  159  #   Convert a string to its uppercase equivalent  Example:  filter {
+  160: #   mutate {     uppercase =&gt; [ "fieldname" ]   } }
+  161  #   Value type is array
+  162  #   Default value: None
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/noop.pp:
+    8  # [*add_field*]
+    9  #   If this filter is successful, add any arbitrary fields to this event.
+   10: #   Example:  filter {   noop {     add_field =&gt; [ "sample", "Hello
+   11  #   world, from %{@source}" ]   } }    On success, the noop plugin
+   12  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   19  #   If this filter is successful, add arbitrary tags to the event. Tags
+   20  #   can be dynamic and include parts of the event using the %{field}
+   21: #   syntax. Example:  filter {   noop {     add_tag =&gt; [
+   22  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   23  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   36  #   If this filter is successful, remove arbitrary tags from the event.
+   37  #   Tags can be dynamic and include parts of the event using the %{field}
+   38: #   syntax. Example:  filter {   noop {     remove_tag =&gt; [
+   39  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   40  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/prune.pp:
+   10  # [*add_field*]
+   11  #   If this filter is successful, add any arbitrary fields to this event.
+   12: #   Example:  filter {   prune {     add_field =&gt; [ "sample", "Hello
+   13  #   world, from %{@source}" ]   } }    On success, the prune plugin
+   14  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   21  #   If this filter is successful, add arbitrary tags to the event. Tags
+   22  #   can be dynamic and include parts of the event using the %{field}
+   23: #   syntax. Example:  filter {   prune {     add_tag =&gt; [
+   24  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   25  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   31  #   Exclude fields which names match specified regexps, by default exclude
+   32  #   unresolved %{field} strings.  filter {    prune {      tags
+   33: #   =&gt; [ "apache-accesslog" ]     blacklist_names =&gt; [ "method",
+   34  #   "(referrer|status)", "${some}_field" ]   } }
+   35  #   Value type is array
+   ..
+   41  #   values are arrays, the fields are pruned on per array item in case all
+   42  #   array items are matched whole field will be deleted.  filter {
+   43: #   prune {      tags             =&gt; [ "apache-accesslog" ]
+   44: #   blacklist_values =&gt; [ "uripath", "/index.php",
+   45  #   "method", "(HEAD|OPTIONS)",                           "status",
+   46  #   "^[^2]" ]   } }
+   ..
+   67  #   If this filter is successful, remove arbitrary tags from the event.
+   68  #   Tags can be dynamic and include parts of the event using the %{field}
+   69: #   syntax. Example:  filter {   prune {     remove_tag =&gt; [
+   70  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   71  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+   93  #   Include only fields only if their names match specified regexps,
+   94  #   default to empty list which means include everything.  filter {
+   95: #   prune {      tags            =&gt; [ "apache-accesslog" ]
+   96: #   whitelist_names =&gt; [ "method", "(referrer|status)", "${some}_field"
+   97  #   ]   } }
+   98  #   Value type is array
+   ..
+  104  #   field values are arrays, the fields are pruned on per array item thus
+  105  #   only matching array items will be included.  filter {    prune {
+  106: #   tags             =&gt; [ "apache-accesslog" ]     whitelist_values
+  107: #   =&gt; [ "uripath", "/index.php",                           "method",
+  108  #   "(GET|POST)",                           "status", "^[^2]" ]   } }
+  109  #   Value type is hash
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/ruby.pp:
+    2  #
+    3  #   Execute ruby code.  For example, to cancel 90% of events, you can do
+    4: #   this:  filter {   ruby {     # Cancel 90% of events     code =&gt;
+    5  #   "event.cancel if rand <= 0.90"   }  }
+    6  #
+    .
+   10  # [*add_field*]
+   11  #   If this filter is successful, add any arbitrary fields to this event.
+   12: #   Example:  filter {   ruby {     add_field =&gt; [ "sample", "Hello
+   13  #   world, from %{@source}" ]   } }    On success, the ruby plugin
+   14  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   21  #   If this filter is successful, add arbitrary tags to the event. Tags
+   22  #   can be dynamic and include parts of the event using the %{field}
+   23: #   syntax. Example:  filter {   ruby {     add_tag =&gt; [
+   24  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   25  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   51  #   If this filter is successful, remove arbitrary tags from the event.
+   52  #   Tags can be dynamic and include parts of the event using the %{field}
+   53: #   syntax. Example:  filter {   ruby {     remove_tag =&gt; [
+   54  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   55  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/sleep.pp:
+    9  # [*add_field*]
+   10  #   If this filter is successful, add any arbitrary fields to this event.
+   11: #   Example:  filter {   sleep {     add_field =&gt; [ "sample", "Hello
+   12  #   world, from %{@source}" ]   } }    On success, the sleep plugin
+   13  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   20  #   If this filter is successful, add arbitrary tags to the event. Tags
+   21  #   can be dynamic and include parts of the event using the %{field}
+   22: #   syntax. Example:  filter {   sleep {     add_tag =&gt; [
+   23  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   24  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   29  # [*every*]
+   30  #   Sleep on every N'th. This option is ignored in replay mode.  Example:
+   31: #   filter {   sleep {     time =&gt; "1"   # Sleep 1 second      every
+   32: #   =&gt; 10   # on every 10th event   } }
+   33  #   Value type is string
+   34  #   Default value: 1
+   ..
+   45  #   If this filter is successful, remove arbitrary tags from the event.
+   46  #   Tags can be dynamic and include parts of the event using the %{field}
+   47: #   syntax. Example:  filter {   sleep {     remove_tag =&gt; [
+   48  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   49  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+   61  #   a speed modifier. For example, a time value of 2 will replay at double
+   62  #   speed, while a value of 0.25 will replay at 1/4th speed.  For example:
+   63: #   filter {   sleep {     time =&gt; 2     replay =&gt; true   } }   The
+   64  #   above will sleep in such a way that it will perform replay 2-times
+   65  #   faster than the original time speed.
+   ..
+   81  #   that you want to use to indicate the amount of time to sleep.
+   82  #   Example:  filter {   sleep {     # Sleep 1 second for every event.
+   83: #   time =&gt; "1"   } }
+   84  #   Value type is string
+   85  #   Default value: None
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/split.pp:
+   13  # [*add_field*]
+   14  #   If this filter is successful, add any arbitrary fields to this event.
+   15: #   Example:  filter {   split {     add_field =&gt; [ "sample", "Hello
+   16  #   world, from %{@source}" ]   } }    On success, the split plugin
+   17  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   24  #   If this filter is successful, add arbitrary tags to the event. Tags
+   25  #   can be dynamic and include parts of the event using the %{field}
+   26: #   syntax. Example:  filter {   split {     add_tag =&gt; [
+   27  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   28  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   47  #   If this filter is successful, remove arbitrary tags from the event.
+   48  #   Tags can be dynamic and include parts of the event using the %{field}
+   49: #   syntax. Example:  filter {   split {     remove_tag =&gt; [
+   50  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   51  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/syslog_pri.pp:
+   11  # [*add_field*]
+   12  #   If this filter is successful, add any arbitrary fields to this event.
+   13: #   Example:  filter {   syslog_pri {     add_field =&gt; [ "sample", "Hello
+   14  #   world, from %{@source}" ]   } }    On success, the syslog_pri plugin
+   15  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   22  #   If this filter is successful, add arbitrary tags to the event. Tags
+   23  #   can be dynamic and include parts of the event using the %{field}
+   24: #   syntax. Example:  filter {   syslog_pri {     add_tag =&gt; [
+   25  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   26  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   45  #   If this filter is successful, remove arbitrary tags from the event.
+   46  #   Tags can be dynamic and include parts of the event using the %{field}
+   47: #   syntax. Example:  filter {   syslog_pri {     remove_tag =&gt; [
+   48  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   49  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/translate.pp:
+   13  # [*add_field*]
+   14  #   If this filter is successful, add any arbitrary fields to this event.
+   15: #   Example:  filter {   translate {     add_field =&gt; [ "sample", "Hello
+   16  #   world, from %{@source}" ]   } }    On success, the translate plugin
+   17  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   24  #   If this filter is successful, add arbitrary tags to the event. Tags
+   25  #   can be dynamic and include parts of the event using the %{field}
+   26: #   syntax. Example:  filter {   translate {     add_tag =&gt; [
+   27  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   28  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   41  # [*dictionary*]
+   42  #   Dictionary to use for translation. Example:  filter {   translate {
+   43: #   dictionary =&gt; [ "100", "Continue",                     "101",
+   44  #   "Switching Protocols",                     "200", "OK",
+   45  #   "201", "Created",                     "202", "Accepted" ]   } }
+   ..
+  101  #   If this filter is successful, remove arbitrary tags from the event.
+  102  #   Tags can be dynamic and include parts of the event using the %{field}
+  103: #   syntax. Example:  filter {   translate {     remove_tag =&gt; [
+  104  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+  105  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/urldecode.pp:
+    8  # [*add_field*]
+    9  #   If this filter is successful, add any arbitrary fields to this event.
+   10: #   Example:  filter {   urldecode {     add_field =&gt; [ "sample", "Hello
+   11  #   world, from %{@source}" ]   } }    On success, the urldecode plugin
+   12  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   19  #   If this filter is successful, add arbitrary tags to the event. Tags
+   20  #   can be dynamic and include parts of the event using the %{field}
+   21: #   syntax. Example:  filter {   urldecode {     add_tag =&gt; [
+   22  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   23  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   48  #   If this filter is successful, remove arbitrary tags from the event.
+   49  #   Tags can be dynamic and include parts of the event using the %{field}
+   50: #   syntax. Example:  filter {   urldecode {     remove_tag =&gt; [
+   51  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   52  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/useragent.pp:
+   13  # [*add_field*]
+   14  #   If this filter is successful, add any arbitrary fields to this event.
+   15: #   Example:  filter {   useragent {     add_field =&gt; [ "sample", "Hello
+   16  #   world, from %{@source}" ]   } }    On success, the useragent plugin
+   17  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   24  #   If this filter is successful, add arbitrary tags to the event. Tags
+   25  #   can be dynamic and include parts of the event using the %{field}
+   26: #   syntax. Example:  filter {   useragent {     add_tag =&gt; [
+   27  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   28  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   48  #   If this filter is successful, remove arbitrary tags from the event.
+   49  #   Tags can be dynamic and include parts of the event using the %{field}
+   50: #   syntax. Example:  filter {   useragent {     remove_tag =&gt; [
+   51  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   52  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/xml.pp:
+    9  # [*add_field*]
+   10  #   If this filter is successful, add any arbitrary fields to this event.
+   11: #   Example:  filter {   xml {     add_field =&gt; [ "sample", "Hello
+   12  #   world, from %{@source}" ]   } }    On success, the xml plugin
+   13  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   20  #   If this filter is successful, add arbitrary tags to the event. Tags
+   21  #   can be dynamic and include parts of the event using the %{field}
+   22: #   syntax. Example:  filter {   xml {     add_tag =&gt; [
+   23  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   24  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   37  #   If this filter is successful, remove arbitrary tags from the event.
+   38  #   Tags can be dynamic and include parts of the event using the %{field}
+   39: #   syntax. Example:  filter {   xml {     remove_tag =&gt; [
+   40  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   41  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+   46  #
+   47  # [*source*]
+   48: #   Config for xml to hash is:  source =&gt; source_field   For example,
+   49  #   if you have the whole xml document in your @message field:  filter {
+   50: #   xml {     source =&gt; "@message"   } }   The above would parse the
+   51  #   xml from the @message field
+   52  #   Value type is string
+   ..
+   71  # [*target*]
+   72  #   Define target for placing the data  for example if you want the data
+   73: #   to be put in the 'doc' field:  filter {   xml {     target =&gt; "doc"
+   74  #   } }   XML in the value of the source field will be expanded into a
+   75  #   datastructure in the "target" field. Note: if the "target" field
+   ..
+   91  #   selected) from parsed XML (using each source field defined using the
+   92  #   method above) and place those values in the destination fields.
+   93: #   Configuration:  xpath =&gt; [ "xpath-syntax", "destination-field" ]
+   94  #   Values returned by XPath parsring from xpath-synatx will be put in the
+   95  #   destination field. Multiple values returned will be pushed onto the
+
+/Users/pmorley/Projects/puppet-logstash/manifests/filter/zeromq.pp:
+   15  # [*add_field*]
+   16  #   If this filter is successful, add any arbitrary fields to this event.
+   17: #   Example:  filter {   zeromq {     add_field =&gt; [ "sample", "Hello
+   18  #   world, from %{@source}" ]   } }    On success, the zeromq plugin
+   19  #   will then add field 'sample' with the  value above and the %{@source}
+   ..
+   26  #   If this filter is successful, add arbitrary tags to the event. Tags
+   27  #   can be dynamic and include parts of the event using the %{field}
+   28: #   syntax. Example:  filter {   zeromq {     add_tag =&gt; [
+   29  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   30  #   "hello" this filter, on success, would add a tag "foo_hello"
+   ..
+   64  #   If this filter is successful, remove arbitrary tags from the event.
+   65  #   Tags can be dynamic and include parts of the event using the %{field}
+   66: #   syntax. Example:  filter {   zeromq {     remove_tag =&gt; [
+   67  #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
+   68  #   "hello" this filter, on success, would remove the tag "foo_hello" if
+   ..
+   77  #   you would set values like: ZMQ::HWM - high water mark ZMQ::IDENTITY -
+   78  #   named queues ZMQ::SWAP_SIZE - space for disk overflow ZMQ::SUBSCRIBE -
+   79: #   topic filters for pubsub  example: sockopt =&gt; ["ZMQ::HWM", 50,
+   80  #   "ZMQ::IDENTITY", "mynamedqueue"]
+   81  #   Value type is hash
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/elasticsearch.pp:
+    4  #   reindexing, etc.  Example:  input {   # Read all documents from
+    5  #   elasticsearch matching the given query   elasticsearch {     host
+    6: #   =&gt; "localhost"     query =&gt; "ERROR"   } }   TODO(sissel):
+    7  #   configurable scroll timeout TODO(sissel): Option to keep the index,
+    8  #   type, and doc id so we can do reindexing?
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/eventlog.pp:
+    3  #   Pull events from a Windows Event Log  To collect Events from the
+    4  #   System Event Log, use a config like:  input {   eventlog {     type
+    5: #   =&gt; 'Win32-EventLog'     logfile  =&gt; 'System'   } }
+    6  #
+    7  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/file.pp:
+   69  # [*exclude*]
+   70  #   Exclusions (matched against the filename, not full path). Globs are
+   71: #   valid here, too. For example, if you have  path =&gt; "/var/log/*"
+   72: #   you might want to exclude gzipped files:  exclude =&gt; "*.gz"
+   73  #   Value type is array
+   74  #   Default value: None
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/gemfire.pp:
+   24  # [*cache_xml_file*]
+   25  #   The path to a GemFire client cache XML file.  Example:
+   26: #   <client-cache&gt;    <pool name="client-pool"
+   27: #   subscription-enabled="true" subscription-redundancy="1"&gt;
+   28: #   <locator host="localhost" port="31331"/&gt;    </pool&gt;
+   29: #   <region name="Logstash"&gt;        <region-attributes
+   30: #   refid="CACHING_PROXY" pool-name="client-pool" &gt;
+   31: #   </region-attributes&gt;    </region&gt;  </client-cache&gt;
+   32  #   Value type is string
+   33  #   Default value: nil
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/generator.pp:
+   74  # [*lines*]
+   75  #   The lines to emit, in order. This option cannot be used with the
+   76: #   'message' setting.  Example:  input {   generator {     lines =&gt; [
+   77  #   "line 1",       "line 2",       "line 3"     ]   }    # Emit all lines
+   78: #   3 times.   count =&gt; 3 }   The above will emit "line 1" then "line
+   79  #   2" then "line", then "line 1", etc...
+   80  #   Value type is array
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/heroku.pp:
+    3  #   Stream events from a heroku app's logs.  This will read events in a
+    4  #   manner similar to how the heroku logs -t command fetches logs.
+    5: #   Recommended filters:  filter {   grok {     pattern =&gt;
+    6  #   "^%{TIMESTAMP_ISO8601:timestamp}
+    7  #   %{WORD:component}\[%{WORD:process}(?:\.%{INT:instance:int})?\]:
+    8: #   %{DATA:message}$"   }   date { timestamp =&gt; ISO8601 } }
+    9  #
+   10  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/pipe.pp:
+   56  # [*command*]
+   57  #   Command to run and read events from, one line at a time.  Example:
+   58: #   command =&gt; "echo hello world"
+   59  #   Value type is string
+   60  #   Default value: None
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/snmptrap.pp:
+    4  #   #<SNMP::SNMPv1Trap:0x6f1a7a4
+    5  #   @varbindlist=[#<SNMP::VarBind:0x2d7bcd8f @value="teststring",
+    6: #   @name=[1.11.12.13.14.15]&gt;],
+    7: #   @timestamp=#<SNMP::TimeTicks:0x1af47e9d @value=55&gt;,
+    8  #   @generictrap=6,   @enterprise=[1.2.3.4.5.6], @sourceip="127.0.0.1",
+    9  #   @agentaddr=#<SNMP::IpAddress:0x29a4833e
+   10: #   @value="\xC0\xC1\xC2\xC3"&gt;,   @specifictrap=99&gt;
+   11  #
+   12  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/input/zeromq.pp:
+  103  #   you would set values like: ZMQ::HWM - high water mark ZMQ::IDENTITY -
+  104  #   named queues ZMQ::SWAP_SIZE - space for disk overflow  example:
+  105: #   sockopt =&gt; ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "mynamedqueue"]
+  106  #   Value type is hash
+  107  #   Default value: None
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/circonus.pp:
+   26  # [*app_name*]
+   27  #   Your Circonus App name This will be passed through event.sprintf so
+   28: #   variables are allowed here:  Example:  app_name =&gt; "%{myappname}"
+   29  #   Value type is string
+   30  #   Default value: None
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/cloudwatch.pp:
+   74  #   The name of the field used to set the dimensions on an event metric
+   75  #   The field named here, if present in an event, must have an array of
+   76: #   one or more key &amp; value pairs, for example...  add_field =&gt; [
+   77  #   "CW_dimensions", "Environment", "CW_dimensions", "prod" ]   or,
+   78: #   equivalently...  add_field =&gt; [ "CW_dimensions", "Environment" ]
+   79: #   add_field =&gt; [ "CW_dimensions", "prod" ]
+   80  #   Value type is string
+   81  #   Default value: "CW_dimensions"
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/email.pp:
+   58  # [*match*]
+   59  #   The registered fields that we want to monitor A hash of matches of
+   60: #   field =&gt; value Takes the form of:     { "match name",
+   61  #   "field.in.event,value.expected, ,
+   62  #   operand(and/or),field.in.event,value.expected, , or...",    "match
+   ..
+   72  #   arguments If you do not specify anything, you will get the following
+   73  #   equivalent code set in every new mail object:    Mail.defaults do
+   74: #   delivery_method :smtp, { :address              =&gt; "localhost",
+   75: #   :port                 =&gt; 25,                          :domain
+   76: #   =&gt; 'localhost.localdomain',                          :user_name
+   77: #   =&gt; nil,                          :password             =&gt; nil,
+   78: #   :authentication       =&gt; nil,(plain, login and cram_md5)
+   79: #   :enable_starttls_auto =&gt; true  }  retriever_method :pop3, {
+   80: #   :address             =&gt; "localhost",
+   81: #   :port                =&gt; 995,                           :user_name
+   82: #   =&gt; nil,                           :password            =&gt; nil,
+   83: #   :enable_ssl          =&gt; true }     end    Mail.deliverymethod.new
+   84: #   #=&gt; Mail::SMTP instance   Mail.retrievermethod.new #=&gt;
+   85  #   Mail::POP3 instance  Each mail object inherits the default set in
+   86  #   Mail.delivery_method, however, on a per email basis, you can override
+   87  #   the method:    mail.delivery_method :sendmail  Or you can override the
+   88  #   method and pass in settings:    mail.delivery_method :sendmail, {
+   89: #   :address =&gt; 'some.host' }  You can also just modify the settings:
+   90: #   mail.delivery_settings = { :address =&gt; 'some.host' }  The passed in
+   91  #   hash is just merged against the defaults with +merge!+ and the result
+   92  #   assigned the mail object.  So the above example will change only the
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/exec.pp:
+    2  #
+    3  #   This output will run a command for any matching event.  Example:
+    4: #   output {   exec {     type =&gt; abuse     command =&gt; "iptables -A
+    5  #   INPUT -s %{clientip} -j DROP"   } }   Run subprocesses via system ruby
+    6  #   function  WARNING: if you want it non-blocking you should use &amp; or
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/gelf.pp:
+   17  #   The GELF custom field mappings. GELF supports arbitrary attributes as
+   18  #   custom fields. This exposes that. Exclude the _ portion of the field
+   19: #   name e.g. custom_fields =&gt; ['foo_field', 'some_value']
+   20  #   setsfoofield=some_value`
+   21  #   Value type is hash
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/gemfire.pp:
+   17  # [*cache_xml_file*]
+   18  #   The path to a GemFire client cache XML file.  Example:
+   19: #   <client-cache&gt;    <pool name="client-pool"&gt;
+   20: #   <locator host="localhost" port="31331"/&gt;    </pool&gt;
+   21: #   <region name="Logstash"&gt;        <region-attributes
+   22: #   refid="CACHING_PROXY" pool-name="client-pool" &gt;
+   23: #   </region-attributes&gt;    </region&gt;  </client-cache&gt;
+   24  #   Value type is string
+   25  #   Default value: nil
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/graphite.pp:
+   69  # [*metrics_format*]
+   70  #   Defines format of the metric string. The placeholder '*' will be
+   71: #   replaced with the name of the actual metric.  metrics_format =&gt;
+   72  #   "foo.bar.*.sum"   NOTE: If no metrics_format is defined the name of
+   73  #   the metric will be used as fallback.
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/graphtastic.pp:
+   68  # [*metrics*]
+   69  #   metrics hash - you will provide a name for your metric and the metric
+   70: #   data as key value pairs.  so for example:  metrics =&gt; { "Response"
+   71: #   =&gt; "%{response}" }  example for the logstash config  metrics =&gt;
+   72  #   [ "Response", "%{response}" ]  NOTE: you can also use the dynamic
+   73  #   fields for the key value as well as the actual value
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/http.pp:
+   37  #
+   38  # [*headers*]
+   39: #   Custom headers to use format is `headers =&gt; ["X-My-Header",
+   40  #   "%{@source_host}"]
+   41  #   Value type is hash
+   ..
+   51  # [*mapping*]
+   52  #   This lets you choose the structure and parts of the event that are
+   53: #   sent.  For example:     mapping =&gt; ["foo", "%{@source_host}",
+   54  #   "bar", "%{@type}"]
+   55  #   Value type is hash
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/librato.pp:
+   33  # [*batch_size*]
+   34  #   Named metrics (NYI) These allow multiple metrics/annotations in the
+   35: #   same output Examples: (Gauge) apache_bytes =&gt; ["type", "gauge",
+   36  #   "source", "%{@source_host}", "value", "%{bytes_received}"] (Counter)
+   37: #   messages_received =&gt; ["type", "counter", "source",
+   38  #   "%{@source_host}", "value", "1"] config /[A-Za-z0-9.:_-]+/, :validate
+   39: #   =&gt; :hash Batch size Number of events to batch up before sending to
+   40  #   Librato.
+   41  #   Value type is string
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/loggly.pp:
+   35  #   https://logs.hoover.loggly.net/inputs/abcdef12-3456-7890-abcd-ef0123456789
+   36  #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   37: #   \----------&gt;   key   <-------------/   You can use %{foo} field
+   38  #   lookups here if you need to pull the api key from the event. This is
+   39  #   mainly aimed at multitenant hosting providers who want to offer
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/metriccatcher.pp:
+    5  #   https://github.com/clearspring/MetricCatcher  At Clearspring, we use
+    6  #   it to count the response codes from Apache logs:  metriccatcher {
+    7: #   host =&gt; "localhost"     port =&gt; "1420"     type =&gt;
+    8: #   "apache-access"     fields =&gt; [ "response" ]     meter =&gt; [
+    9  #   "%{@source_host}.apache.response.%{response}", "1" ] }
+   10  #
+   ..
+   26  #   %{@source_host} for metric names and also for values. This is a hash
+   27  #   field with key of the metric name, value of the metric value. Example:
+   28: #   counter =&gt; [ "%{@source_host}.apache.hits.%{response}, "1" ]  The
+   29  #   value will be coerced to a floating point value. Values which cannot
+   30  #   be coerced will zero (0)
+   ..
+   89  #   %{@source_host} for metric names and also for values. This is a hash
+   90  #   field with key of the metric name, value of the metric value. Example:
+   91: #   timer =&gt; [ "%{@sourcehost}.apache.responsetime, "%{response_time}"
+   92  #   ]  The value will be coerced to a floating point value. Values which
+   93  #   cannot be coerced will zero (0)
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/nagios.pp:
+   13  #   matching a given pattern to send events to nagios. So use grep to
+   14  #   match and also to add the required fields.  filter {   grep {     type
+   15: #   =&gt; "linux-syslog"     match =&gt; [ "@message",
+   16: #   "(error|ERROR|CRITICAL)" ]     add_tag =&gt; [ "nagios-update" ]
+   17: #   add_field =&gt; [       "nagios_host", "%{@source_host}",
+   18  #   "nagios_service", "the name of your nagios service check"     ]   } }
+   19  #   output{   nagios {     # only process events with this tag     tags
+   20: #   =&gt; "nagios-update"   } }
+   21  #
+   22  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/nagios_nsca.pp:
+    8  #   is a sample config using the nagios_nsca output:  output {
+    9  #   nagios_nsca {     # specify the hostname or ip of your nagios server
+   10: #   host =&gt; "nagios.example.com"      # specify the port to connect to
+   11: #   port =&gt; 5667   } }
+   12  #
+   13  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/riak.pp:
+   18  # [*bucket_props*]
+   19  #   Bucket properties (NYI) Logstash hash of properties for the bucket
+   20: #   i.e. bucket_props =&gt; ["r", "one", "w", "one", "dw", "one"] or
+   21: #   bucket_props =&gt; ["n_val", "3"] Note that the Logstash config
+   22  #   language cannot support hash or array values Properties will be passed
+   23  #   as-is
+   ..
+   52  #
+   53  # [*indices*]
+   54: #   Indices Array of fields to add 2i on e.g. `indices =&gt;
+   55  #   ["@source_host", "@type"] Off by default as not everyone runs eleveldb
+   56  #   Value type is array
+   ..
+   83  #   Logstash hash that maps to the riak-client options here:
+   84  #   https://github.com/basho/riak-ruby-client/wiki/Connecting-to-Riak
+   85: #   You'll likely want something like this: ssl_opts =&gt; ["pem",
+   86  #   "/etc/riak.pem", "ca_path", "/usr/share/certificates"] Per the riak
+   87  #   client docs, the above sample options will turn on SSLVERIFY_PEER`
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/riemann.pp:
+   54  #   (http://aphyr.github.com/riemann/concepts.html).  The following event
+   55  #   fields are supported: description, state, metric, ttl, service
+   56: #   Example:  riemann {     riemann_event =&gt; [          "metric",
+   57  #   "%{metric}",         "service", "%{service}"     ] }   metric and ttl
+   58  #   values will be coerced to a floating point value. Values which cannot
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/statsd.pp:
+   17  #
+   18  # [*count*]
+   19: #   A count metric. metric_name =&gt; count as hash
+   20  #   Value type is hash
+   21  #   Default value: {}
+   ..
+   92  #
+   93  # [*timing*]
+   94: #   A timing metric. metric_name =&gt; duration as hash
+   95  #   Value type is hash
+   96  #   Default value: {}
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/zabbix.pp:
+   10  #   grep filter. Presumably, you only want certain events matching a given
+   11  #   pattern to send events to zabbix, so use grep to match and also to add
+   12: #   the required fields.   filter {    grep {      type =&gt;
+   13: #   "linux-syslog"      match =&gt; [ "@message", "(error|ERROR|CRITICAL)"
+   14: #   ]      add_tag =&gt; [ "zabbix-sender" ]      add_field =&gt; [
+   15  #   "zabbix_host", "%{@source_host}",        "zabbix_item", "item.key"
+   16  #   ]   } }  output {   zabbix {     # only process events with this tag
+   17: #   tags =&gt; "zabbix-sender"      # specify the hostname or ip of your
+   18: #   zabbix server     # (defaults to localhost)     host =&gt; "localhost"
+   19: #   # specify the port to connect to (default 10051)     port =&gt;
+   20  #   "10051"      # specify the path to zabbix_sender     # (defaults to
+   21: #   "/usr/local/bin/zabbix_sender")     zabbix_sender =&gt;
+   22  #   "/usr/local/bin/zabbix_sender"   } }
+   23  #
+
+/Users/pmorley/Projects/puppet-logstash/manifests/output/zeromq.pp:
+   41  #   you would set values like:  ZMQ::HWM - high water mark ZMQ::IDENTITY -
+   42  #   named queues ZMQ::SWAP_SIZE - space for disk overflow Example: sockopt
+   43: #   =&gt; ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "mynamedqueue"]
+   44  #   Value type is hash
+   45  #   Default value: None
+
+276 matches across 57 files

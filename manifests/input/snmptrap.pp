@@ -1,13 +1,13 @@
 # == Define: logstash::input::snmptrap
 #
 #   Read snmp trap messages as events  Resulting @message looks like :
-#   #&lt;SNMP::SNMPv1Trap:0x6f1a7a4
-#   @varbindlist=[#&lt;SNMP::VarBind:0x2d7bcd8f @value="teststring",
-#   @name=[1.11.12.13.14.15]&gt;],
-#   @timestamp=#&lt;SNMP::TimeTicks:0x1af47e9d @value=55&gt;,
+#   #<SNMP::SNMPv1Trap:0x6f1a7a4
+#   @varbindlist=[#<SNMP::VarBind:0x2d7bcd8f @value="teststring",
+#   @name=[1.11.12.13.14.15]>],
+#   @timestamp=#<SNMP::TimeTicks:0x1af47e9d @value=55>,
 #   @generictrap=6,   @enterprise=[1.2.3.4.5.6], @sourceip="127.0.0.1",
-#   @agentaddr=#&lt;SNMP::IpAddress:0x29a4833e
-#   @value="\xC0\xC1\xC2\xC3"&gt;,   @specifictrap=99&gt;
+#   @agentaddr=#<SNMP::IpAddress:0x29a4833e
+#   @value="\xC0\xC1\xC2\xC3">,   @specifictrap=99>
 #
 #
 # === Parameters

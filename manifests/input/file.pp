@@ -68,8 +68,8 @@
 #
 # [*exclude*]
 #   Exclusions (matched against the filename, not full path). Globs are
-#   valid here, too. For example, if you have  path =&gt; "/var/log/*"
-#   you might want to exclude gzipped files:  exclude =&gt; "*.gz"
+#   valid here, too. For example, if you have  path => "/var/log/*"
+#   you might want to exclude gzipped files:  exclude => "*.gz"
 #   Value type is array
 #   Default value: None
 #   This variable is optional

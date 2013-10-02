@@ -9,7 +9,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   prune {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   prune {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the prune plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -20,7 +20,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   prune {     add_tag =&gt; [
+#   syntax. Example:  filter {   prune {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -30,7 +30,7 @@
 # [*blacklist_names*]
 #   Exclude fields which names match specified regexps, by default exclude
 #   unresolved %{field} strings.  filter {    prune {      tags
-#   =&gt; [ "apache-accesslog" ]     blacklist_names =&gt; [ "method",
+#   => [ "apache-accesslog" ]     blacklist_names => [ "method",
 #   "(referrer|status)", "${some}_field" ]   } }
 #   Value type is array
 #   Default value: ["%{[^}]+}"]
@@ -40,8 +40,8 @@
 #   Exclude specified fields if their values match regexps. In case field
 #   values are arrays, the fields are pruned on per array item in case all
 #   array items are matched whole field will be deleted.  filter {
-#   prune {      tags             =&gt; [ "apache-accesslog" ]
-#   blacklist_values =&gt; [ "uripath", "/index.php",
+#   prune {      tags             => [ "apache-accesslog" ]
+#   blacklist_values => [ "uripath", "/index.php",
 #   "method", "(HEAD|OPTIONS)",                           "status",
 #   "^[^2]" ]   } }
 #   Value type is hash
@@ -66,7 +66,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   prune {     remove_tag =&gt; [
+#   syntax. Example:  filter {   prune {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present
@@ -92,8 +92,8 @@
 # [*whitelist_names*]
 #   Include only fields only if their names match specified regexps,
 #   default to empty list which means include everything.  filter {
-#   prune {      tags            =&gt; [ "apache-accesslog" ]
-#   whitelist_names =&gt; [ "method", "(referrer|status)", "${some}_field"
+#   prune {      tags            => [ "apache-accesslog" ]
+#   whitelist_names => [ "method", "(referrer|status)", "${some}_field"
 #   ]   } }
 #   Value type is array
 #   Default value: []
@@ -103,8 +103,8 @@
 #   Include specified fields only if their values match regexps. In case
 #   field values are arrays, the fields are pruned on per array item thus
 #   only matching array items will be included.  filter {    prune {
-#   tags             =&gt; [ "apache-accesslog" ]     whitelist_values
-#   =&gt; [ "uripath", "/index.php",                           "method",
+#   tags             => [ "apache-accesslog" ]     whitelist_values
+#   => [ "uripath", "/index.php",                           "method",
 #   "(GET|POST)",                           "status", "^[^2]" ]   } }
 #   Value type is hash
 #   Default value: {}

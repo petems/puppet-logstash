@@ -2,10 +2,10 @@
 #
 #   Stream events from a heroku app's logs.  This will read events in a
 #   manner similar to how the heroku logs -t command fetches logs.
-#   Recommended filters:  filter {   grok {     pattern =&gt;
+#   Recommended filters:  filter {   grok {     pattern =>
 #   "^%{TIMESTAMP_ISO8601:timestamp}
 #   %{WORD:component}\[%{WORD:process}(?:\.%{INT:instance:int})?\]:
-#   %{DATA:message}$"   }   date { timestamp =&gt; ISO8601 } }
+#   %{DATA:message}$"   }   date { timestamp => ISO8601 } }
 #
 #
 # === Parameters

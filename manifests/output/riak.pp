@@ -17,8 +17,8 @@
 #
 # [*bucket_props*]
 #   Bucket properties (NYI) Logstash hash of properties for the bucket
-#   i.e. bucket_props =&gt; ["r", "one", "w", "one", "dw", "one"] or
-#   bucket_props =&gt; ["n_val", "3"] Note that the Logstash config
+#   i.e. bucket_props => ["r", "one", "w", "one", "dw", "one"] or
+#   bucket_props => ["n_val", "3"] Note that the Logstash config
 #   language cannot support hash or array values Properties will be passed
 #   as-is
 #   Value type is hash
@@ -51,7 +51,7 @@
 #   This variable is optional
 #
 # [*indices*]
-#   Indices Array of fields to add 2i on e.g. `indices =&gt;
+#   Indices Array of fields to add 2i on e.g. `indices =>
 #   ["@source_host", "@type"] Off by default as not everyone runs eleveldb
 #   Value type is array
 #   Default value: None
@@ -82,7 +82,7 @@
 #   SSL Options Options for SSL connections Only applied if SSL is enabled
 #   Logstash hash that maps to the riak-client options here:
 #   https://github.com/basho/riak-ruby-client/wiki/Connecting-to-Riak
-#   You'll likely want something like this: ssl_opts =&gt; ["pem",
+#   You'll likely want something like this: ssl_opts => ["pem",
 #   "/etc/riak.pem", "ca_path", "/usr/share/certificates"] Per the riak
 #   client docs, the above sample options will turn on SSLVERIFY_PEER`
 #   Value type is hash

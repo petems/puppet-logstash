@@ -17,7 +17,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   date {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   date {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the date plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -28,7 +28,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   date {     add_tag =&gt; [
+#   syntax. Example:  filter {   date {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -55,7 +55,7 @@
 #   library): You can see the docs for this format here:
 #   joda.time.format.DateTimeFormat  An array with field name first, and
 #   format patterns following, [ field, formats... ]  If your time field
-#   has multiple possible formats, you can do this:  match =&gt; [
+#   has multiple possible formats, you can do this:  match => [
 #   "logdate", "MMM dd YYY HH:mm:ss",           "MMM  d YYY HH:mm:ss",
 #   "ISO8601" ]   The above will match a syslog (rfc3164) or iso8601
 #   timestamp.  There are a few special exceptions, the following format
@@ -66,7 +66,7 @@
 #   epoch "TAI64N" - will parse tai64n time values For example, if you
 #   have a field 'logdate' and with a value that looks like 'Aug 13 2010
 #   00:03:44', you would use this configuration:  filter {   date {
-#   match =&gt; [ "logdate", "MMM dd YYYY HH:mm:ss" ]   } }
+#   match => [ "logdate", "MMM dd YYYY HH:mm:ss" ]   } }
 #   Value type is array
 #   Default value: []
 #   This variable is optional
@@ -74,7 +74,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   date {     remove_tag =&gt; [
+#   syntax. Example:  filter {   date {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present

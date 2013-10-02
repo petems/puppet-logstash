@@ -1,7 +1,7 @@
 # == Define: logstash::output::exec
 #
 #   This output will run a command for any matching event.  Example:
-#   output {   exec {     type =&gt; abuse     command =&gt; "iptables -A
+#   output {   exec {     type => abuse     command => "iptables -A
 #   INPUT -s %{clientip} -j DROP"   } }   Run subprocesses via system ruby
 #   function  WARNING: if you want it non-blocking you should use &amp; or
 #   dtach or other such techniques

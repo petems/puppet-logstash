@@ -3,17 +3,17 @@
 #   The metrics filter is useful for aggregating metrics.  For example, if
 #   you have a field 'response' that is a http response code, and you want
 #   to count each kind of response, you can do this:  filter {   metrics {
-#   meter =&gt; [ "http.%{response}" ]     add_tag =&gt; metric   } }
+#   meter => [ "http.%{response}" ]     add_tag => metric   } }
 #   Metrics are flushed every 5 seconds. Metrics appear as new events in
 #   the event stream and go through any filters that occur after as well
 #   as outputs.  In general, you will want to add a tag to your metrics
 #   and have an output explicitly look for that tag.  The event that is
 #   flushed will include every 'meter' and 'timer' metric in the following
-#   way:  'meter' values  For a meter =&gt; "something" you will receive
+#   way:  'meter' values  For a meter => "something" you will receive
 #   the following fields:  "thing.count" - the total count of events
 #   "thing.rate_1m" - the 1-minute rate (sliding) "thing.rate_5m" - the
 #   5-minute rate (sliding) "thing.rate_15m" - the 15-minute rate
-#   (sliding) 'timer' values  For a timer =&gt; [ "thing", "%{duration}" ]
+#   (sliding) 'timer' values  For a timer => [ "thing", "%{duration}" ]
 #   you will receive the following fields:  "thing.count" - the total
 #   count of events "thing.rate_1m" - the 1-minute rate of events
 #   (sliding) "thing.rate_5m" - the 5-minute rate of events (sliding)
@@ -23,16 +23,16 @@
 #   this metric "thing.mean" - the mean for this metric Example: computing
 #   event rate  For a simple example, let's track how many events per
 #   second are running through logstash:  input {   generator {     type
-#   =&gt; "generated"   } }  filter {   metrics {     type =&gt;
-#   "generated"     meter =&gt; "events"     add_tag =&gt; "metric"   } }
+#   => "generated"   } }  filter {   metrics {     type =>
+#   "generated"     meter => "events"     add_tag => "metric"   } }
 #   output {   stdout {     # only emit events with the 'metric' tag
-#   tags =&gt; "metric"     message =&gt; "rate: %{events.rate_1m}"   } }
+#   tags => "metric"     message => "rate: %{events.rate_1m}"   } }
 #   Running the above:  % java -jar logstash.jar agent -f example.conf
 #   rate: 23721.983566819246 rate: 24811.395722536377 rate:
 #   25875.892745934525 rate: 26836.42375967113   We see the output
 #   includes our 'events' 1-minute rate.  In the real world, you would
 #   emit this to graphite or another metrics store, like so:  output {
-#   graphite {     metrics =&gt; [ "events.rate_1m", "%{events.rate_1m}" ]
+#   graphite {     metrics => [ "events.rate_1m", "%{events.rate_1m}" ]
 #   } }
 #
 #
@@ -40,7 +40,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   metrics {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   metrics {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the metrics plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -51,7 +51,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   metrics {     add_tag =&gt; [
+#   syntax. Example:  filter {   metrics {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -70,14 +70,14 @@
 #   seconds.  This is useful if you want to only include events that are
 #   near real-time in your metrics.  Example, to only count events that
 #   are within 10 seconds of real-time, you would do this:  filter {
-#   metrics {     meter =&gt; [ "hits" ]     ignore_older_than =&gt; 10
+#   metrics {     meter => [ "hits" ]     ignore_older_than => 10
 #   } }
 #   Value type is number
 #   Default value: 0
 #   This variable is optional
 #
 # [*meter*]
-#   syntax: meter =&gt; [ "name of metric", "name of metric" ]
+#   syntax: meter => [ "name of metric", "name of metric" ]
 #   Value type is array
 #   Default value: []
 #   This variable is optional
@@ -85,7 +85,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   metrics {     remove_tag =&gt; [
+#   syntax. Example:  filter {   metrics {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present
@@ -101,7 +101,7 @@
 #   This variable is optional
 #
 # [*timer*]
-#   syntax: timer =&gt; [ "name of metric", "%{time_value}" ]
+#   syntax: timer => [ "name of metric", "%{time_value}" ]
 #   Value type is hash
 #   Default value: {}
 #   This variable is optional

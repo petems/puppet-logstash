@@ -16,7 +16,7 @@
 # === Parameters
 #
 # [*count*]
-#   A count metric. metric_name =&gt; count as hash
+#   A count metric. metric_name => count as hash
 #   Value type is hash
 #   Default value: {}
 #   This variable is optional
@@ -91,7 +91,7 @@
 #   This variable is optional
 #
 # [*timing*]
-#   A timing metric. metric_name =&gt; duration as hash
+#   A timing metric. metric_name => duration as hash
 #   Value type is hash
 #   Default value: {}
 #   This variable is optional

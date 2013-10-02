@@ -55,7 +55,7 @@
 #
 # [*command*]
 #   Command to run and read events from, one line at a time.  Example:
-#   command =&gt; "echo hello world"
+#   command => "echo hello world"
 #   Value type is string
 #   Default value: None
 #   This variable is required

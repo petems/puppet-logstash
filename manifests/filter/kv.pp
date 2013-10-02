@@ -15,7 +15,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   kv {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   kv {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the kv plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -26,7 +26,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   kv {     add_tag =&gt; [
+#   syntax. Example:  filter {   kv {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -45,7 +45,7 @@
 #   pairs.  Example with URL Query Strings  Example, to split out the args
 #   from a url query string such as
 #   '?pin=12345~0&amp;d=123&amp;e=foo@bar.com&amp;oq=bobo&amp;ss=12345':
-#   filter {   kv {     field_split =&gt; "&amp;?"    } }   The above
+#   filter {   kv {     field_split => "&amp;?"    } }   The above
 #   splits on both "&amp;" and "?" characters, giving you the following
 #   fields:  pin: 12345~0 d: 123 e: foo@bar.com oq: bobo ss: 12345
 #   Value type is string
@@ -60,7 +60,7 @@
 #
 # [*prefix*]
 #   A string to prepend to all of the extracted keys  Example, to prepend
-#   arg_ to all keys:  filter { kv { prefix =&gt; "arg_" } }
+#   arg_ to all keys:  filter { kv { prefix => "arg_" } }
 #   Value type is string
 #   Default value: ""
 #   This variable is optional
@@ -68,7 +68,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   kv {     remove_tag =&gt; [
+#   syntax. Example:  filter {   kv {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present
@@ -78,7 +78,7 @@
 #
 # [*source*]
 #   The fields to perform 'key=value' searching on  Example, to use the
-#   @message field:  filter { kv { source =&gt; "@message" } }
+#   @message field:  filter { kv { source => "@message" } }
 #   Value type is string
 #   Default value: "@message"
 #   This variable is optional
@@ -92,7 +92,7 @@
 #
 # [*target*]
 #   The name of the container to put all of the key-value pairs into
-#   Example, to place all keys into field kv:  filter { kv { target =&gt;
+#   Example, to place all keys into field kv:  filter { kv { target =>
 #   "kv" } }
 #   Value type is string
 #   Default value: "@fields"
@@ -101,8 +101,8 @@
 # [*trim*]
 #   A string of characters to trim from the value. This is useful if your
 #   values are wrapped in brackets or are terminated by comma (like
-#   postfix logs)  Example, to strip '&lt;' '&gt;' and ',' characters from
-#   values:  filter {    kv {      trim =&gt; "&lt;&gt;,"   } }
+#   postfix logs)  Example, to strip '<' '>' and ',' characters from
+#   values:  filter {    kv {      trim => "<>,"   } }
 #   Value type is string
 #   Default value: None
 #   This variable is optional
@@ -118,7 +118,7 @@
 # [*value_split*]
 #   A string of characters to use as delimiters for identifying key-value
 #   relations.  Example, to identify key-values such as 'key1:value1
-#   key2:value2':  filter { kv { value_split =&gt; ":" } }
+#   key2:value2':  filter { kv { value_split => ":" } }
 #   Value type is string
 #   Default value: "="
 #   This variable is optional

@@ -10,7 +10,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   alter {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   alter {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the alter plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -21,7 +21,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   alter {     add_tag =&gt; [
+#   syntax. Example:  filter {   alter {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -30,7 +30,7 @@
 #
 # [*coalesce*]
 #   Sets the value of field_name to the first nonnull expression among its
-#   arguments.  Example:  filter {   alter {     coalesce =&gt; [
+#   arguments.  Example:  filter {   alter {     coalesce => [
 #   "field_name", "value1", "value2", "value3", ...     ]   } }
 #   Value type is array
 #   Default value: None
@@ -39,7 +39,7 @@
 # [*condrewrite*]
 #   Change the content of the field to the specified value if the actual
 #   content is equal to the expected one.  Example:  filter {   alter {
-#   condrewrite =&gt; [           "field_name", "expected_value",
+#   condrewrite => [           "field_name", "expected_value",
 #   "new_value"           "field_name2", "expected_value2, "new_value2"
 #   ....        ]   } }
 #   Value type is array
@@ -49,7 +49,7 @@
 # [*condrewriteother*]
 #   Change the content of the field to the specified value if the content
 #   of another field is equal to the expected one.  Example:  filter {
-#   alter {     condrewriteother =&gt; [           "field_name",
+#   alter {     condrewriteother => [           "field_name",
 #   "expected_value", "field_name_to_change", "value",
 #   "field_name2", "expected_value2, "field_name_to_change2", "value2",
 #   ....     ]   } }
@@ -67,7 +67,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   alter {     remove_tag =&gt; [
+#   syntax. Example:  filter {   alter {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present

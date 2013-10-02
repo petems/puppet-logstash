@@ -68,7 +68,7 @@
 #
 # [*metrics_format*]
 #   Defines format of the metric string. The placeholder '*' will be
-#   replaced with the name of the actual metric.  metrics_format =&gt;
+#   replaced with the name of the actual metric.  metrics_format =>
 #   "foo.bar.*.sum"   NOTE: If no metrics_format is defined the name of
 #   the metric will be used as fallback.
 #   Value type is string

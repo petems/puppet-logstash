@@ -32,11 +32,11 @@
 #
 # [*batch_size*]
 #   Named metrics (NYI) These allow multiple metrics/annotations in the
-#   same output Examples: (Gauge) apache_bytes =&gt; ["type", "gauge",
+#   same output Examples: (Gauge) apache_bytes => ["type", "gauge",
 #   "source", "%{@source_host}", "value", "%{bytes_received}"] (Counter)
-#   messages_received =&gt; ["type", "counter", "source",
+#   messages_received => ["type", "counter", "source",
 #   "%{@source_host}", "value", "1"] config /[A-Za-z0-9.:_-]+/, :validate
-#   =&gt; :hash Batch size Number of events to batch up before sending to
+#   => :hash Batch size Number of events to batch up before sending to
 #   Librato.
 #   Value type is string
 #   Default value: "10"

@@ -7,8 +7,8 @@
 #   overkill # for you, take a look at the 'nagios' output instead.  Here
 #   is a sample config using the nagios_nsca output:  output {
 #   nagios_nsca {     # specify the hostname or ip of your nagios server
-#   host =&gt; "nagios.example.com"      # specify the port to connect to
-#   port =&gt; 5667   } }
+#   host => "nagios.example.com"      # specify the port to connect to
+#   port => 5667   } }
 #
 #
 # === Parameters

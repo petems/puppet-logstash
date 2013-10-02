@@ -31,8 +31,8 @@
 #   0.043   The pattern for this could be:  %{IP:client} %{WORD:method}
 #   %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}   A more
 #   realistic example, let's read these logs from a file:  input {   file
-#   {     path =&gt; "/var/log/http.log"     type =&gt; "examplehttp"   }
-#   } filter {   grok {     type =&gt; "examplehttp"     pattern =&gt;
+#   {     path => "/var/log/http.log"     type => "examplehttp"   }
+#   } filter {   grok {     type => "examplehttp"     pattern =>
 #   "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes}
 #   %{NUMBER:duration}"   } }   After the grok filter, the event will have
 #   a few extra fields in it:  client: 55.3.244.1 method: GET request:
@@ -43,10 +43,10 @@
 #   Custom Patterns  Sometimes logstash doesn't have a pattern you need.
 #   For this, you have a few options.  First, you can use the Oniguruma
 #   syntax for 'named capture' which will let you match a piece of text
-#   and save it as a field:  (?&lt;field_name&gt;the pattern here)   For
+#   and save it as a field:  (?<field_name>the pattern here)   For
 #   example, postfix logs have a 'queue id' that is an 11-character
 #   hexadecimal value. I can capture that easily like this:
-#   (?&lt;queue_id&gt;[0-9A-F]{11})   Alternately, you can create a custom
+#   (?<queue_id>[0-9A-F]{11})   Alternately, you can create a custom
 #   patterns file.  Create a directory called patterns with a file in it
 #   called extra (the file name doesn't matter, but name it meaningfully
 #   for yourself) In that file, write the pattern you need as the pattern
@@ -56,9 +56,9 @@
 #   this plugin to tell logstash where your custom patterns directory is.
 #   Here's a full example with a sample log:  Jan  1 06:25:43 mailserver14
 #   postfix/cleanup[21403]: BEF25A72965:
-#   message-id=&lt;20130101142543.5828399CCAF@mailserver14.example.com&gt;
-#   filter {   grok {     patterns_dir =&gt; "./patterns"     pattern
-#   =&gt; "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}:
+#   message-id=<20130101142543.5828399CCAF@mailserver14.example.com>
+#   filter {   grok {     patterns_dir => "./patterns"     pattern
+#   => "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}:
 #   %{GREEDYDATA:message}"   } }   The above will match and result in the
 #   following fields:  timestamp: Jan  1 06:25:43 logsource: mailserver14
 #   program: postfix/cleanup pid: 21403 queue_id: BEF25A72965 The
@@ -70,7 +70,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   grok {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   grok {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the grok plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -81,7 +81,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   grok {     add_tag =&gt; [
+#   syntax. Example:  filter {   grok {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -118,8 +118,8 @@
 #   This variable is optional
 #
 # [*match*]
-#   A hash of matches of field =&gt; value  For example:  filter {   grok
-#   {     match =&gt; [ "@message", "Duration: %{NUMBER:duration} ]   } }
+#   A hash of matches of field => value  For example:  filter {   grok
+#   {     match => [ "@message", "Duration: %{NUMBER:duration} ]   } }
 #   Value type is hash
 #   Default value: {}
 #   This variable is optional
@@ -150,7 +150,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   grok {     remove_tag =&gt; [
+#   syntax. Example:  filter {   grok {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present

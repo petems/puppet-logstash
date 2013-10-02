@@ -9,7 +9,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   mutate {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   mutate {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the mutate plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -20,7 +20,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   mutate {     add_tag =&gt; [
+#   syntax. Example:  filter {   mutate {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -32,7 +32,7 @@
 #   an integer. If the field value is an array, all members will be
 #   converted. If the field is a hash, no action will be taken.  Valid
 #   conversion targets are: integer, float, string  Example:  filter {
-#   mutate {     convert =&gt; [ "fieldname", "integer" ]   } }
+#   mutate {     convert => [ "fieldname", "integer" ]   } }
 #   Value type is hash
 #   Default value: None
 #   This variable is optional
@@ -49,7 +49,7 @@
 #   replacement if the field is not a string, no action will be taken
 #   This configuration takes an array consisting of 3 elements per
 #   field/substitution.  be aware of escaping any backslash in the config
-#   file  for example:  filter {   mutate {     gsub =&gt; [       #
+#   file  for example:  filter {   mutate {     gsub => [       #
 #   replace all forward slashes with underscore       "fieldname", "/",
 #   "_",        # replace backslashes, question marks, hashes, and minuses
 #   with       # dot       "fieldname2", "[\\?#-]", "."     ]   } }
@@ -59,7 +59,7 @@
 #
 # [*join*]
 #   Join an array with a separator character, does nothing on non-array
-#   fields  Example:     filter {   mutate {     join =&gt; ["fieldname",
+#   fields  Example:     filter {   mutate {     join => ["fieldname",
 #   ","]  }      }
 #   Value type is hash
 #   Default value: None
@@ -67,7 +67,7 @@
 #
 # [*lowercase*]
 #   Convert a string to its lowercase equivalent  Example:  filter {
-#   mutate {     lowercase =&gt; [ "fieldname" ]   } }
+#   mutate {     lowercase => [ "fieldname" ]   } }
 #   Value type is array
 #   Default value: None
 #   This variable is optional
@@ -76,7 +76,7 @@
 #   merge two fields or arrays or hashes String fields will be converted
 #   in array, so  array + string will work  string + string will result in
 #   an 2 entry array in dest_field  array and hash will not work  Example:
-#   filter {   mutate {       merge =&gt; ["dest_field", "added_field"]
+#   filter {   mutate {       merge => ["dest_field", "added_field"]
 #   } }
 #   Value type is hash
 #   Default value: None
@@ -84,7 +84,7 @@
 #
 # [*remove*]
 #   Remove one or more fields.  Example:  filter {   mutate {     remove
-#   =&gt; [ "client" ]  # Removes the 'client' field   } }
+#   => [ "client" ]  # Removes the 'client' field   } }
 #   Value type is array
 #   Default value: None
 #   This variable is optional
@@ -92,7 +92,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   mutate {     remove_tag =&gt; [
+#   syntax. Example:  filter {   mutate {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present
@@ -102,7 +102,7 @@
 #
 # [*rename*]
 #   Rename one or more fields.  Example:  filter {   mutate {     #
-#   Renames the 'HOSTORIP' field to 'client_ip'     rename =&gt; [
+#   Renames the 'HOSTORIP' field to 'client_ip'     rename => [
 #   "HOSTORIP", "client_ip" ]   } }
 #   Value type is hash
 #   Default value: None
@@ -111,7 +111,7 @@
 # [*replace*]
 #   Replace a field with a new value. The new value can include %{foo}
 #   strings to help you build a new value from other parts of the event.
-#   Example:  filter {   mutate {     replace =&gt; [ "@message",
+#   Example:  filter {   mutate {     replace => [ "@message",
 #   "%{source_host}: My new message" ]   } }
 #   Value type is hash
 #   Default value: None
@@ -119,14 +119,14 @@
 #
 # [*split*]
 #   Split a field to an array using a separator character. Only works on
-#   string fields.  Example:  filter {   mutate {       split =&gt;
+#   string fields.  Example:  filter {   mutate {       split =>
 #   ["fieldname", ","]   } }
 #   Value type is hash
 #   Default value: None
 #   This variable is optional
 #
 # [*strip*]
-#   Strip whitespaces  Example:  filter {   mutate {       strip =&gt;
+#   Strip whitespaces  Example:  filter {   mutate {       strip =>
 #   ["field1", "field2"]   } }
 #   Value type is array
 #   Default value: None
@@ -150,14 +150,14 @@
 # [*update*]
 #   Update an existing field with a new value. If the field does not
 #   exist, then no action will be taken.  Example:  filter {   mutate {
-#   update =&gt; [ "sample", "My new message" ]   } }
+#   update => [ "sample", "My new message" ]   } }
 #   Value type is hash
 #   Default value: None
 #   This variable is optional
 #
 # [*uppercase*]
 #   Convert a string to its uppercase equivalent  Example:  filter {
-#   mutate {     uppercase =&gt; [ "fieldname" ]   } }
+#   mutate {     uppercase => [ "fieldname" ]   } }
 #   Value type is array
 #   Default value: None
 #   This variable is optional

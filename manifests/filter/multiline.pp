@@ -6,9 +6,9 @@
 #   filter was to allow joining of multi-line messages from files into a
 #   single event. For example - joining java exception and stacktrace
 #   messages into a single event.  TODO(sissel): Document any issues? The
-#   config looks like this:  filter {   multiline {     type =&gt; "type"
-#   pattern =&gt; "pattern, a regexp"     negate =&gt; boolean     what
-#   =&gt; "previous" or "next"   } }   The 'regexp' should match what you
+#   config looks like this:  filter {   multiline {     type => "type"
+#   pattern => "pattern, a regexp"     negate => boolean     what
+#   => "previous" or "next"   } }   The 'regexp' should match what you
 #   believe to be an indicator that the field is part of a multi-line
 #   event  The 'what' must be "previous" or "next" and indicates the
 #   relation to the multi-line event.  The 'negate' can be "true" or
@@ -17,11 +17,11 @@
 #   applied. (vice-versa is also true)  For example, java stack traces are
 #   multiline and usually have the message starting at the far-left, then
 #   each subsequent line indented. Do this:  filter {   multiline {
-#   type =&gt; "somefiletype"     pattern =&gt; "^\s"     what =&gt;
+#   type => "somefiletype"     pattern => "^\s"     what =>
 #   "previous"   } }   This says that any line starting with whitespace
 #   belongs to the previous line.  Another example is C line continuations
 #   (backslash). Here's how to do that:  filter {   multiline {     type
-#   =&gt; "somefiletype "     pattern =&gt; "\\$"     what =&gt; "next"
+#   => "somefiletype "     pattern => "\\$"     what => "next"
 #   } }
 #
 #
@@ -29,7 +29,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   multiline {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   multiline {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the multiline plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -40,7 +40,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   multiline {     add_tag =&gt; [
+#   syntax. Example:  filter {   multiline {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -78,7 +78,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   multiline {     remove_tag =&gt; [
+#   syntax. Example:  filter {   multiline {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present

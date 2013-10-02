@@ -4,9 +4,9 @@
 #   your choosing.  The DNS filter performs a lookup (either an A
 #   record/CNAME record lookup or a reverse lookup at the PTR record) on
 #   records specified under the "reverse" and "resolve" arrays.  The
-#   config should look like this:  filter {   dns {     type =&gt; 'type'
-#   reverse =&gt; [ "@source_host", "field_with_address" ]     resolve
-#   =&gt; [ "field_with_fqdn" ]     action =&gt; "replace"   } }
+#   config should look like this:  filter {   dns {     type => 'type'
+#   reverse => [ "@source_host", "field_with_address" ]     resolve
+#   => [ "field_with_fqdn" ]     action => "replace"   } }
 #   Caveats: at the moment, there's no way to tune the timeout with the
 #   'resolv' core library.  It does seem to be fixed in here:
 #   http://redmine.ruby-lang.org/issues/5100  but isn't currently in
@@ -24,7 +24,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   dns {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   dns {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the dns plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -35,7 +35,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   dns {     add_tag =&gt; [
+#   syntax. Example:  filter {   dns {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -52,7 +52,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   dns {     remove_tag =&gt; [
+#   syntax. Example:  filter {   dns {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present

@@ -73,10 +73,10 @@
 # [*field_dimensions*]
 #   The name of the field used to set the dimensions on an event metric
 #   The field named here, if present in an event, must have an array of
-#   one or more key &amp; value pairs, for example...  add_field =&gt; [
+#   one or more key &amp; value pairs, for example...  add_field => [
 #   "CW_dimensions", "Environment", "CW_dimensions", "prod" ]   or,
-#   equivalently...  add_field =&gt; [ "CW_dimensions", "Environment" ]
-#   add_field =&gt; [ "CW_dimensions", "prod" ]
+#   equivalently...  add_field => [ "CW_dimensions", "Environment" ]
+#   add_field => [ "CW_dimensions", "prod" ]
 #   Value type is string
 #   Default value: "CW_dimensions"
 #   This variable is optional

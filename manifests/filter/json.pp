@@ -8,7 +8,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   json {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   json {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the json plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -19,7 +19,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   json {     add_tag =&gt; [
+#   syntax. Example:  filter {   json {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -36,7 +36,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   json {     remove_tag =&gt; [
+#   syntax. Example:  filter {   json {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present
@@ -45,9 +45,9 @@
 #   This variable is optional
 #
 # [*source*]
-#   Config for json is:  source =&gt; source_field   For example, if you
+#   Config for json is:  source => source_field   For example, if you
 #   have json data in the @message field:  filter {   json {     source
-#   =&gt; "@message"   } }   The above would parse the xml from the
+#   => "@message"   } }   The above would parse the xml from the
 #   @message field
 #   Value type is string
 #   Default value: None
@@ -62,7 +62,7 @@
 #
 # [*target*]
 #   Define target for placing the data  for example if you want the data
-#   to be put in the 'doc' field:  filter {   json {     target =&gt;
+#   to be put in the 'doc' field:  filter {   json {     target =>
 #   "doc"   } }   json in the value of the source field will be expanded
 #   into a datastructure in the "target" field. Note: if the "target"
 #   field already exists, it will be overridden Required

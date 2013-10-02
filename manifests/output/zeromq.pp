@@ -40,7 +40,7 @@
 #   http://api.zeromq.org/2-1:zmq-setsockopt for details.  This is where
 #   you would set values like:  ZMQ::HWM - high water mark ZMQ::IDENTITY -
 #   named queues ZMQ::SWAP_SIZE - space for disk overflow Example: sockopt
-#   =&gt; ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "mynamedqueue"]
+#   => ["ZMQ::HWM", 50, "ZMQ::IDENTITY", "mynamedqueue"]
 #   Value type is hash
 #   Default value: None
 #   This variable is optional

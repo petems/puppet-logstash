@@ -67,8 +67,8 @@
 #
 # [*metrics*]
 #   metrics hash - you will provide a name for your metric and the metric
-#   data as key value pairs.  so for example:  metrics =&gt; { "Response"
-#   =&gt; "%{response}" }  example for the logstash config  metrics =&gt;
+#   data as key value pairs.  so for example:  metrics => { "Response"
+#   => "%{response}" }  example for the logstash config  metrics =>
 #   [ "Response", "%{response}" ]  NOTE: you can also use the dynamic
 #   fields for the key value as well as the actual value
 #   Value type is hash

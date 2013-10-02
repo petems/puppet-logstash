@@ -3,7 +3,7 @@
 #   Read from elasticsearch.  This is useful for replay testing logs,
 #   reindexing, etc.  Example:  input {   # Read all documents from
 #   elasticsearch matching the given query   elasticsearch {     host
-#   =&gt; "localhost"     query =&gt; "ERROR"   } }   TODO(sissel):
+#   => "localhost"     query => "ERROR"   } }   TODO(sissel):
 #   configurable scroll timeout TODO(sissel): Option to keep the index,
 #   type, and doc id so we can do reindexing?
 #

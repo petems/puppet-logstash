@@ -53,7 +53,7 @@
 #   A Hash to set Riemann event fields
 #   (http://aphyr.github.com/riemann/concepts.html).  The following event
 #   fields are supported: description, state, metric, ttl, service
-#   Example:  riemann {     riemann_event =&gt; [          "metric",
+#   Example:  riemann {     riemann_event => [          "metric",
 #   "%{metric}",         "service", "%{service}"     ] }   metric and ttl
 #   values will be coerced to a floating point value. Values which cannot
 #   be coerced will zero (0.0).  description, by default, will be set to

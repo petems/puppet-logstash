@@ -36,7 +36,7 @@
 #   This variable is optional
 #
 # [*headers*]
-#   Custom headers to use format is `headers =&gt; ["X-My-Header",
+#   Custom headers to use format is `headers => ["X-My-Header",
 #   "%{@source_host}"]
 #   Value type is hash
 #   Default value: None
@@ -50,7 +50,7 @@
 #
 # [*mapping*]
 #   This lets you choose the structure and parts of the event that are
-#   sent.  For example:     mapping =&gt; ["foo", "%{@source_host}",
+#   sent.  For example:     mapping => ["foo", "%{@source_host}",
 #   "bar", "%{@type}"]
 #   Value type is hash
 #   Default value: None

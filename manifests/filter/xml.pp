@@ -8,7 +8,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   xml {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   xml {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the xml plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -19,7 +19,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   xml {     add_tag =&gt; [
+#   syntax. Example:  filter {   xml {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -36,7 +36,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   xml {     remove_tag =&gt; [
+#   syntax. Example:  filter {   xml {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present
@@ -45,9 +45,9 @@
 #   This variable is optional
 #
 # [*source*]
-#   Config for xml to hash is:  source =&gt; source_field   For example,
+#   Config for xml to hash is:  source => source_field   For example,
 #   if you have the whole xml document in your @message field:  filter {
-#   xml {     source =&gt; "@message"   } }   The above would parse the
+#   xml {     source => "@message"   } }   The above would parse the
 #   xml from the @message field
 #   Value type is string
 #   Default value: None
@@ -70,7 +70,7 @@
 #
 # [*target*]
 #   Define target for placing the data  for example if you want the data
-#   to be put in the 'doc' field:  filter {   xml {     target =&gt; "doc"
+#   to be put in the 'doc' field:  filter {   xml {     target => "doc"
 #   } }   XML in the value of the source field will be expanded into a
 #   datastructure in the "target" field. Note: if the "target" field
 #   already exists, it will be overridden Required
@@ -90,7 +90,7 @@
 #   xpath will additionally select string values (.to_s on whatever is
 #   selected) from parsed XML (using each source field defined using the
 #   method above) and place those values in the destination fields.
-#   Configuration:  xpath =&gt; [ "xpath-syntax", "destination-field" ]
+#   Configuration:  xpath => [ "xpath-syntax", "destination-field" ]
 #   Values returned by XPath parsring from xpath-synatx will be put in the
 #   destination field. Multiple values returned will be pushed onto the
 #   destination field as an array. As such, multiple matches across

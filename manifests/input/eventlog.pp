@@ -2,7 +2,7 @@
 #
 #   Pull events from a Windows Event Log  To collect Events from the
 #   System Event Log, use a config like:  input {   eventlog {     type
-#   =&gt; 'Win32-EventLog'     logfile  =&gt; 'System'   } }
+#   => 'Win32-EventLog'     logfile  => 'System'   } }
 #
 #
 # === Parameters

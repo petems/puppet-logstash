@@ -34,7 +34,7 @@
 #   Loggly 'Inputs' page as something like this
 #   https://logs.hoover.loggly.net/inputs/abcdef12-3456-7890-abcd-ef0123456789
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   \----------&gt;   key   &lt;-------------/   You can use %{foo} field
+#   \---------->   key   <-------------/   You can use %{foo} field
 #   lookups here if you need to pull the api key from the event. This is
 #   mainly aimed at multitenant hosting providers who want to offer
 #   shipping a customer's logs to that customer's loggly account.

@@ -57,7 +57,7 @@
 #
 # [*match*]
 #   The registered fields that we want to monitor A hash of matches of
-#   field =&gt; value Takes the form of:     { "match name",
+#   field => value Takes the form of:     { "match name",
 #   "field.in.event,value.expected, ,
 #   operand(and/or),field.in.event,value.expected, , or...",    "match
 #   name", "..." }  The match name can be referenced using the
@@ -71,23 +71,23 @@
 #   user_name, password, authentication(bool), domain sendmail: location,
 #   arguments If you do not specify anything, you will get the following
 #   equivalent code set in every new mail object:    Mail.defaults do
-#   delivery_method :smtp, { :address              =&gt; "localhost",
-#   :port                 =&gt; 25,                          :domain
-#   =&gt; 'localhost.localdomain',                          :user_name
-#   =&gt; nil,                          :password             =&gt; nil,
-#   :authentication       =&gt; nil,(plain, login and cram_md5)
-#   :enable_starttls_auto =&gt; true  }  retriever_method :pop3, {
-#   :address             =&gt; "localhost",
-#   :port                =&gt; 995,                           :user_name
-#   =&gt; nil,                           :password            =&gt; nil,
-#   :enable_ssl          =&gt; true }     end    Mail.deliverymethod.new
-#   #=&gt; Mail::SMTP instance   Mail.retrievermethod.new #=&gt;
+#   delivery_method :smtp, { :address              => "localhost",
+#   :port                 => 25,                          :domain
+#   => 'localhost.localdomain',                          :user_name
+#   => nil,                          :password             => nil,
+#   :authentication       => nil,(plain, login and cram_md5)
+#   :enable_starttls_auto => true  }  retriever_method :pop3, {
+#   :address             => "localhost",
+#   :port                => 995,                           :user_name
+#   => nil,                           :password            => nil,
+#   :enable_ssl          => true }     end    Mail.deliverymethod.new
+#   #=> Mail::SMTP instance   Mail.retrievermethod.new #=>
 #   Mail::POP3 instance  Each mail object inherits the default set in
 #   Mail.delivery_method, however, on a per email basis, you can override
 #   the method:    mail.delivery_method :sendmail  Or you can override the
 #   method and pass in settings:    mail.delivery_method :sendmail, {
-#   :address =&gt; 'some.host' }  You can also just modify the settings:
-#   mail.delivery_settings = { :address =&gt; 'some.host' }  The passed in
+#   :address => 'some.host' }  You can also just modify the settings:
+#   mail.delivery_settings = { :address => 'some.host' }  The passed in
 #   hash is just merged against the defaults with +merge!+ and the result
 #   assigned the mail object.  So the above example will change only the
 #   :address value of the global smtp_settings to be 'some.host', keeping

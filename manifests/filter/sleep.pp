@@ -8,7 +8,7 @@
 #
 # [*add_field*]
 #   If this filter is successful, add any arbitrary fields to this event.
-#   Example:  filter {   sleep {     add_field =&gt; [ "sample", "Hello
+#   Example:  filter {   sleep {     add_field => [ "sample", "Hello
 #   world, from %{@source}" ]   } }    On success, the sleep plugin
 #   will then add field 'sample' with the  value above and the %{@source}
 #   piece replaced with that value from the  event.
@@ -19,7 +19,7 @@
 # [*add_tag*]
 #   If this filter is successful, add arbitrary tags to the event. Tags
 #   can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   sleep {     add_tag =&gt; [
+#   syntax. Example:  filter {   sleep {     add_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would add a tag "foo_hello"
 #   Value type is array
@@ -28,8 +28,8 @@
 #
 # [*every*]
 #   Sleep on every N'th. This option is ignored in replay mode.  Example:
-#   filter {   sleep {     time =&gt; "1"   # Sleep 1 second      every
-#   =&gt; 10   # on every 10th event   } }
+#   filter {   sleep {     time => "1"   # Sleep 1 second      every
+#   => 10   # on every 10th event   } }
 #   Value type is string
 #   Default value: 1
 #   This variable is optional
@@ -44,7 +44,7 @@
 # [*remove_tag*]
 #   If this filter is successful, remove arbitrary tags from the event.
 #   Tags can be dynamic and include parts of the event using the %{field}
-#   syntax. Example:  filter {   sleep {     remove_tag =&gt; [
+#   syntax. Example:  filter {   sleep {     remove_tag => [
 #   "foo_%{somefield}" ]   } }   If the event has field "somefield" ==
 #   "hello" this filter, on success, would remove the tag "foo_hello" if
 #   it is present
@@ -60,7 +60,7 @@
 #   specify a time setting as well, this filter will use the time value as
 #   a speed modifier. For example, a time value of 2 will replay at double
 #   speed, while a value of 0.25 will replay at 1/4th speed.  For example:
-#   filter {   sleep {     time =&gt; 2     replay =&gt; true   } }   The
+#   filter {   sleep {     time => 2     replay => true   } }   The
 #   above will sleep in such a way that it will perform replay 2-times
 #   faster than the original time speed.
 #   Value type is boolean
@@ -80,7 +80,7 @@
 #   with a field value) is useful if you have an attribute of your event
 #   that you want to use to indicate the amount of time to sleep.
 #   Example:  filter {   sleep {     # Sleep 1 second for every event.
-#   time =&gt; "1"   } }
+#   time => "1"   } }
 #   Value type is string
 #   Default value: None
 #   This variable is optional

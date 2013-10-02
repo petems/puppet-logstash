@@ -73,9 +73,9 @@
 #
 # [*lines*]
 #   The lines to emit, in order. This option cannot be used with the
-#   'message' setting.  Example:  input {   generator {     lines =&gt; [
+#   'message' setting.  Example:  input {   generator {     lines => [
 #   "line 1",       "line 2",       "line 3"     ]   }    # Emit all lines
-#   3 times.   count =&gt; 3 }   The above will emit "line 1" then "line
+#   3 times.   count => 3 }   The above will emit "line 1" then "line
 #   2" then "line", then "line 1", etc...
 #   Value type is array
 #   Default value: None

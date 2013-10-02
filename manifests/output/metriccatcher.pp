@@ -4,8 +4,8 @@
 #   Coda Hale's Metrics.  More info on MetricCatcher:
 #   https://github.com/clearspring/MetricCatcher  At Clearspring, we use
 #   it to count the response codes from Apache logs:  metriccatcher {
-#   host =&gt; "localhost"     port =&gt; "1420"     type =&gt;
-#   "apache-access"     fields =&gt; [ "response" ]     meter =&gt; [
+#   host => "localhost"     port => "1420"     type =>
+#   "apache-access"     fields => [ "response" ]     meter => [
 #   "%{@source_host}.apache.response.%{response}", "1" ] }
 #
 #
@@ -25,7 +25,7 @@
 #   The metrics to send. This supports dynamic strings like
 #   %{@source_host} for metric names and also for values. This is a hash
 #   field with key of the metric name, value of the metric value. Example:
-#   counter =&gt; [ "%{@source_host}.apache.hits.%{response}, "1" ]  The
+#   counter => [ "%{@source_host}.apache.hits.%{response}, "1" ]  The
 #   value will be coerced to a floating point value. Values which cannot
 #   be coerced will zero (0)
 #   Value type is hash
@@ -88,7 +88,7 @@
 #   The metrics to send. This supports dynamic strings like
 #   %{@source_host} for metric names and also for values. This is a hash
 #   field with key of the metric name, value of the metric value. Example:
-#   timer =&gt; [ "%{@sourcehost}.apache.responsetime, "%{response_time}"
+#   timer => [ "%{@sourcehost}.apache.responsetime, "%{response_time}"
 #   ]  The value will be coerced to a floating point value. Values which
 #   cannot be coerced will zero (0)
 #   Value type is hash

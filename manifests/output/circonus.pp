@@ -25,7 +25,7 @@
 #
 # [*app_name*]
 #   Your Circonus App name This will be passed through event.sprintf so
-#   variables are allowed here:  Example:  app_name =&gt; "%{myappname}"
+#   variables are allowed here:  Example:  app_name => "%{myappname}"
 #   Value type is string
 #   Default value: None
 #   This variable is required

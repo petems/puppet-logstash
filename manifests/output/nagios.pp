@@ -12,12 +12,12 @@
 #   is with the grep filter. Presumably, you only want certain events
 #   matching a given pattern to send events to nagios. So use grep to
 #   match and also to add the required fields.  filter {   grep {     type
-#   =&gt; "linux-syslog"     match =&gt; [ "@message",
-#   "(error|ERROR|CRITICAL)" ]     add_tag =&gt; [ "nagios-update" ]
-#   add_field =&gt; [       "nagios_host", "%{@source_host}",
+#   => "linux-syslog"     match => [ "@message",
+#   "(error|ERROR|CRITICAL)" ]     add_tag => [ "nagios-update" ]
+#   add_field => [       "nagios_host", "%{@source_host}",
 #   "nagios_service", "the name of your nagios service check"     ]   } }
 #   output{   nagios {     # only process events with this tag     tags
-#   =&gt; "nagios-update"   } }
+#   => "nagios-update"   } }
 #
 #
 # === Parameters

@@ -16,7 +16,7 @@
 # [*custom_fields*]
 #   The GELF custom field mappings. GELF supports arbitrary attributes as
 #   custom fields. This exposes that. Exclude the _ portion of the field
-#   name e.g. custom_fields =&gt; ['foo_field', 'some_value']
+#   name e.g. custom_fields => ['foo_field', 'some_value']
 #   setsfoofield=some_value`
 #   Value type is hash
 #   Default value: {}

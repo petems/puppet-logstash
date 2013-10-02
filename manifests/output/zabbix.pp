@@ -9,16 +9,16 @@
 #   Zabbix Trapper item.  The easiest way to use this output is with the
 #   grep filter. Presumably, you only want certain events matching a given
 #   pattern to send events to zabbix, so use grep to match and also to add
-#   the required fields.   filter {    grep {      type =&gt;
-#   "linux-syslog"      match =&gt; [ "@message", "(error|ERROR|CRITICAL)"
-#   ]      add_tag =&gt; [ "zabbix-sender" ]      add_field =&gt; [
+#   the required fields.   filter {    grep {      type =>
+#   "linux-syslog"      match => [ "@message", "(error|ERROR|CRITICAL)"
+#   ]      add_tag => [ "zabbix-sender" ]      add_field => [
 #   "zabbix_host", "%{@source_host}",        "zabbix_item", "item.key"
 #   ]   } }  output {   zabbix {     # only process events with this tag
-#   tags =&gt; "zabbix-sender"      # specify the hostname or ip of your
-#   zabbix server     # (defaults to localhost)     host =&gt; "localhost"
-#   # specify the port to connect to (default 10051)     port =&gt;
+#   tags => "zabbix-sender"      # specify the hostname or ip of your
+#   zabbix server     # (defaults to localhost)     host => "localhost"
+#   # specify the port to connect to (default 10051)     port =>
 #   "10051"      # specify the path to zabbix_sender     # (defaults to
-#   "/usr/local/bin/zabbix_sender")     zabbix_sender =&gt;
+#   "/usr/local/bin/zabbix_sender")     zabbix_sender =>
 #   "/usr/local/bin/zabbix_sender"   } }
 #
 #
